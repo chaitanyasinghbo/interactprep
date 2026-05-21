@@ -1,0 +1,1541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interact / Rotary Officer Prep · Service Above Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbf8f1;
+    --panel: #ffffff;
+    --line: #e7e2d3;
+    --line-soft: #f0ebda;
+    --ink: #0b1730;
+    --ink-soft: #475569;
+    --ink-mute: #94a3b8;
+    --rblue: #17458f;     /* royal Rotary blue */
+    --rblue-bg: #ecf2fc;
+    --rblue-line: #c7d8f5;
+    --gold: #b8860b;       /* azure-gold pair */
+    --gold-bg: #fdf7e3;
+    --gold-line: #ecdba1;
+    --cran: #b32850;       /* cranberry — areas of focus */
+    --cran-bg: #fdedf2;
+    --cran-line: #f3c4d3;
+    --emer: #0f7a52;
+    --emer-bg: #e9f7f0;
+    --emer-line: #b6e2cd;
+    --sky:  #1e6fb8;
+    --sky-bg: #e8f1fa;
+    --sky-line: #b9d6ef;
+    --plum: #6b3ea8;
+    --plum-bg: #f1ebfa;
+    --plum-line: #d4c1ec;
+    --warn: #b45309;
+    --warn-bg: #fffbeb;
+    --green: #15803d;
+    --red:   #b91c1c;
+    --shadow: 0 1px 2px rgba(15,23,42,.04), 0 4px 18px rgba(15,23,42,.06);
+    --radius: 14px;
+    --radius-sm: 9px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 14.5px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Source Serif 4', Georgia, serif; }
+
+  /* ── Top bar ─────────────────────────────────────────────────── */
+  header.top {
+    position: sticky; top: 0; z-index: 30;
+    background: rgba(251,248,241,.94);
+    backdrop-filter: saturate(160%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-row { max-width: 1380px; margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .brand { font-weight: 800; font-size: 18px; letter-spacing: -0.01em; }
+  .brand .wheel {
+    display: inline-block; width: 14px; height: 14px;
+    background: radial-gradient(circle, var(--gold) 30%, var(--rblue) 31%, var(--rblue) 100%);
+    border-radius: 50%; margin-right: 10px; vertical-align: -2px;
+    box-shadow: inset 0 0 0 2px var(--gold);
+  }
+  .sub { color: var(--ink-soft); font-size: 12.5px; }
+  .spacer { flex: 1; }
+  .search { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; min-width: 260px; }
+  .search input { border: 0; outline: 0; background: transparent; font-family: inherit; font-size: 13.5px; flex: 1; color: var(--ink); }
+
+  .tabs { max-width: 1380px; margin: 0 auto; padding: 0 28px 12px; display: flex; gap: 4px; flex-wrap: wrap; }
+  .tab {
+    padding: 10px 16px; cursor: pointer; font-weight: 600; font-size: 13.5px;
+    color: var(--ink-soft); border-bottom: 2px solid transparent; transition: all .12s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--rblue); border-bottom-color: var(--rblue); }
+  .tab .count { font-size: 11px; color: var(--ink-mute); margin-left: 4px; font-weight: 500; }
+
+  .chips-row { max-width: 1380px; margin: 0 auto; padding: 0 28px 14px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    border: 1px solid var(--line); background: white; padding: 6px 12px;
+    border-radius: 999px; font-size: 12.5px; font-weight: 600;
+    color: var(--ink-soft); cursor: pointer; transition: all .12s ease; user-select: none;
+  }
+  .chip:hover { border-color: var(--ink); color: var(--ink); }
+  .chip.active { background: var(--ink); color: white; border-color: var(--ink); }
+  .chip-label { font-size: 11px; font-weight: 700; color: var(--ink-mute); letter-spacing: 0.06em; text-transform: uppercase; margin-right: 4px; }
+
+  /* ── Main ────────────────────────────────────────────────────── */
+  main { max-width: 1380px; margin: 0 auto; padding: 18px 28px 80px; }
+  .summary-bar { display: flex; gap: 14px; align-items: baseline; margin-bottom: 18px; flex-wrap: wrap; }
+  .summary-bar h2 { margin: 0; font-size: 22px; letter-spacing: -0.015em; }
+  .summary-bar .sublabel { color: var(--ink-soft); font-size: 13px; }
+
+  /* Card grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 16px 14px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform .12s ease, box-shadow .12s ease;
+    position: relative; overflow: hidden;
+  }
+  .card:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(15,23,42,.05), 0 12px 28px rgba(15,23,42,.08); }
+  .card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--ink-mute);
+  }
+  .card.cat-identity::before { background: var(--rblue); }
+  .card.cat-focus::before    { background: var(--cran); }
+  .card.cat-service::before  { background: var(--emer); }
+  .card.cat-test::before     { background: var(--gold); }
+  .card.cat-symbol::before   { background: var(--gold); }
+  .card.cat-interact::before { background: var(--sky); }
+  .card.cat-people::before   { background: #7a5a2a; }
+  .card.cat-history::before  { background: #7a5a2a; }
+  .card.cat-program::before  { background: var(--plum); }
+  .card.cat-quote::before    { background: var(--gold); }
+  .card.cat-handbook::before { background: #0a8a55; }
+
+  .card h3 { margin: 0; font-size: 15.5px; line-height: 1.35; letter-spacing: -0.005em; }
+  .card .meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .tag {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 2px 7px; border-radius: 5px; text-transform: uppercase;
+  }
+  .tag.identity { background: var(--rblue-bg); color: var(--rblue); }
+  .tag.focus    { background: var(--cran-bg);  color: var(--cran); }
+  .tag.service  { background: var(--emer-bg);  color: var(--emer); }
+  .tag.test     { background: var(--gold-bg);  color: var(--gold); }
+  .tag.symbol   { background: var(--gold-bg);  color: var(--gold); }
+  .tag.interact { background: var(--sky-bg);   color: var(--sky); }
+  .tag.people   { background: #f3eadb;         color: #7a5a2a; }
+  .tag.history  { background: #f3eadb;         color: #7a5a2a; }
+  .tag.program  { background: var(--plum-bg);  color: var(--plum); }
+  .tag.quote    { background: var(--gold-bg);  color: var(--gold); }
+  .tag.handbook { background: #e6f5ed;         color: #0a8a55; }
+  .tag.diff-easy     { background: #ecfdf5; color: #047857; }
+  .tag.diff-medium   { background: #eff6ff; color: #1d4ed8; }
+  .tag.diff-hard     { background: #fef3c7; color: #92400e; }
+  .tag.diff-officer  { background: #fce7f3; color: #be185d; }
+  .tag.type-mcq      { background: #f1f5f9; color: var(--ink-soft); }
+  .tag.type-fr       { background: #eef2ff; color: #4338ca; }
+  .tag.year { background: #f1f5f9; color: var(--ink-soft); }
+
+  .field { font-size: 13.5px; }
+  .field .lbl {
+    display: inline-block; min-width: 76px; color: var(--ink-mute);
+    font-weight: 700; font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase;
+    margin-right: 6px; vertical-align: top;
+  }
+  .field .val { color: var(--ink); }
+  .field ol, .field ul { margin: 4px 0 0 18px; padding: 0; }
+  .field li { margin-bottom: 3px; }
+
+  .card .pull {
+    border-left: 3px solid var(--gold); background: var(--gold-bg);
+    padding: 8px 10px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 13px; color: #6b4503;
+  }
+  .card .pull strong { color: var(--warn); }
+  .card .related { font-size: 12px; color: var(--ink-soft); }
+  .card .verbatim {
+    background: linear-gradient(180deg, #fefcf6, #faf7ec);
+    border: 1px solid #efe6cc; border-radius: var(--radius-sm);
+    padding: 12px 14px; font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; line-height: 1.6; color: #1a1305;
+  }
+  .card .verbatim .lbl-v { display: block; font-family: 'Inter', sans-serif; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #b69148; font-weight: 700; margin-bottom: 6px; }
+
+  /* ── Quiz ────────────────────────────────────────────────────── */
+  .quiz-setup {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 24px; box-shadow: var(--shadow); max-width: 720px;
+  }
+  .quiz-setup h3 { margin: 0 0 14px; font-size: 18px; letter-spacing: -0.01em; }
+  .quiz-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .quiz-row .qlbl { font-size: 11.5px; font-weight: 700; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.05em; min-width: 90px; }
+  .btn {
+    background: var(--rblue); color: white; border: 0; padding: 10px 20px;
+    border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer;
+    transition: opacity .12s;
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn.ghost { background: white; color: var(--ink); border: 1px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--ink); }
+
+  .quiz-card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 24px; box-shadow: var(--shadow); max-width: 800px;
+  }
+  .qhead { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .qhead .qnum { font-size: 12px; color: var(--ink-mute); font-weight: 600; }
+  .qhead .qprog { flex: 1; height: 6px; background: var(--line-soft); border-radius: 999px; overflow: hidden; }
+  .qhead .qprog > div { height: 100%; background: var(--rblue); transition: width .3s; }
+  .qhead .qstreak { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
+  .qprompt { font-size: 16.5px; line-height: 1.5; margin-bottom: 16px; }
+  .qchoices { display: flex; flex-direction: column; gap: 8px; }
+  .qchoice {
+    border: 1px solid var(--line); background: white; padding: 12px 14px;
+    border-radius: 10px; cursor: pointer; font-size: 14px; line-height: 1.45;
+    transition: all .12s; text-align: left; display: flex; gap: 10px; align-items: flex-start;
+  }
+  .qchoice .qletter {
+    font-weight: 800; color: var(--ink-mute); min-width: 22px; font-size: 12.5px;
+    background: var(--line-soft); border-radius: 5px; padding: 2px 5px; text-align: center;
+  }
+  .qchoice:hover { border-color: var(--rblue); background: var(--rblue-bg); }
+  .qchoice.selected { border-color: var(--rblue); background: var(--rblue-bg); }
+  .qchoice.right { border-color: var(--green); background: #ecfdf5; }
+  .qchoice.right .qletter { background: var(--green); color: white; }
+  .qchoice.wrong { border-color: var(--red); background: #fef2f2; }
+  .qchoice.wrong .qletter { background: var(--red); color: white; }
+  .qexpl {
+    margin-top: 14px; padding: 12px 14px; background: var(--gold-bg);
+    border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+    font-size: 13.5px; line-height: 1.5; color: #5a3c08;
+  }
+  .qexpl strong { color: #6b4503; }
+  .qactions { margin-top: 18px; display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
+  .qfr {
+    background: var(--line-soft); border: 1px dashed var(--line);
+    border-radius: var(--radius-sm); padding: 14px;
+    font-size: 13.5px; color: var(--ink-soft);
+  }
+  .qfr strong { color: var(--ink); }
+
+  .summary-result {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; box-shadow: var(--shadow);
+  }
+  .summary-result h3 { margin: 0 0 8px; font-size: 22px; }
+  .summary-result .score { font-size: 48px; font-weight: 800; color: var(--rblue); letter-spacing: -0.02em; }
+  .summary-result .score-sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 18px; }
+  .summary-result table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+  .summary-result th, .summary-result td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-soft); }
+  .summary-result th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-mute); }
+
+  /* High-yield list */
+  .hy-card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 14px;
+  }
+  .hy-card h3 { margin: 0 0 10px; font-size: 16.5px; color: var(--rblue); }
+  .hy-card ol { margin: 0 0 0 22px; padding: 0; }
+  .hy-card li { margin-bottom: 7px; line-height: 1.55; }
+  .hy-card li strong { color: var(--ink); }
+
+  .placeholder {
+    background: var(--panel); border: 2px dashed var(--line);
+    border-radius: var(--radius); padding: 40px; text-align: center; color: var(--ink-soft);
+  }
+  .placeholder h3 { margin: 0 0 8px; color: var(--ink); }
+
+  /* ── Handbook tab ─────────────────────────────────────────────── */
+  .hb-section { margin-bottom: 26px; }
+  .hb-section > h3 {
+    margin: 0 0 12px; font-size: 13px; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute);
+  }
+  .hb-banner {
+    background: linear-gradient(135deg, #0a8a55 0%, #0d9f63 100%);
+    color: white; padding: 22px 24px; border-radius: var(--radius);
+    box-shadow: var(--shadow); margin-bottom: 22px;
+  }
+  .hb-banner h2 { margin: 0 0 4px; font-size: 22px; letter-spacing: -0.015em; color: white; }
+  .hb-banner .sub { color: rgba(255,255,255,.85); font-size: 13.5px; }
+  .hb-banner .pills { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .hb-banner .pill {
+    background: rgba(255,255,255,.16); color: white;
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em;
+  }
+  .hb-flow {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .hb-step {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px 16px; box-shadow: var(--shadow);
+    position: relative; padding-left: 50px;
+  }
+  .hb-step .num {
+    position: absolute; left: 14px; top: 14px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #0a8a55; color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 14px;
+  }
+  .hb-step h4 { margin: 0 0 4px; font-size: 14px; color: #0a8a55; letter-spacing: 0.02em; text-transform: uppercase; }
+  .hb-step p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+
+  .hb-table-wrap {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; box-shadow: var(--shadow);
+  }
+  .hb-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .hb-table thead th {
+    background: #f3faf6; color: #0a8a55;
+    text-align: left; padding: 11px 14px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--line);
+  }
+  .hb-table tbody td { padding: 12px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  .hb-table tbody tr:last-child td { border-bottom: 0; }
+  .hb-table tbody tr:hover { background: #fafdfb; }
+  .hb-table .activity { font-weight: 700; color: var(--ink); }
+  .hb-table .objective { color: var(--ink-soft); font-size: 12.5px; margin-top: 3px; }
+  .hb-table .hashtag {
+    display: inline-block; background: #eef7f3; color: #0a8a55;
+    padding: 3px 9px; border-radius: 5px;
+    font-size: 11.5px; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .hb-table .points { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .hb-table .points small { display: block; font-weight: 500; color: var(--ink-soft); font-size: 11.5px; margin-top: 2px; }
+
+  .hb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .hb-mini {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px 16px; box-shadow: var(--shadow);
+  }
+  .hb-mini h4 { margin: 0 0 4px; font-size: 14px; color: var(--ink); }
+  .hb-mini .role { color: #0a8a55; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+  .hb-mini .meta-line { color: var(--ink-soft); font-size: 12.5px; margin-top: 4px; }
+
+  .hb-rules {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 20px; box-shadow: var(--shadow);
+  }
+  .hb-rules ul { margin: 0; padding-left: 20px; }
+  .hb-rules li { margin-bottom: 7px; line-height: 1.5; }
+  .hb-rules li strong { color: var(--ink); }
+  .hb-rules .warn-line {
+    margin-top: 12px; padding: 10px 12px;
+    background: var(--warn-bg); border-left: 3px solid var(--warn);
+    border-radius: 0 8px 8px 0; font-size: 13px; color: #6b4503;
+  }
+  @media (max-width: 740px) {
+    .hb-flow { grid-template-columns: 1fr; }
+    .hb-table thead { display: none; }
+    .hb-table tbody td { display: block; padding: 8px 14px; border-bottom: 0; }
+    .hb-table tbody tr { border-bottom: 1px solid var(--line-soft); padding: 8px 0; }
+  }
+
+  @media (max-width: 640px) {
+    .top-row { padding: 12px 16px; }
+    main { padding: 16px 16px 60px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <div class="brand"><span class="wheel"></span>Interact / Rotary Officer Prep</div>
+    <span class="sub">Service Above Self &middot; 7 Areas of Focus &middot; 4-Way Test</span>
+    <div class="spacer"></div>
+    <div class="search">
+      <input id="searchbox" placeholder="Search concepts, people, programs..." />
+    </div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <div class="tab active" data-tab="concepts">Concepts <span class="count" id="ct-concepts"></span></div>
+    <div class="tab" data-tab="people">People &amp; History <span class="count" id="ct-people"></span></div>
+    <div class="tab" data-tab="programs">Programs <span class="count" id="ct-programs"></span></div>
+    <div class="tab" data-tab="quotes">Quotes &amp; Mottos <span class="count" id="ct-quotes"></span></div>
+    <div class="tab" data-tab="quiz">Quiz <span class="count" id="ct-quiz"></span></div>
+    <div class="tab" data-tab="highyield">High-Yield</div>
+    <div class="tab" data-tab="handbook">Handbook Map</div>
+  </nav>
+  <div class="chips-row" id="chips-row"></div>
+</header>
+
+<main id="root"></main>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   DATA
+   ────────────────────────────────────────────────────────────────── */
+
+const CONCEPTS = [
+  // ── Identity ─────────────────────────────────────────────────
+  { id:"obj", cat:"identity", title:"The Object of Rotary",
+    summary:"Rotary's four official aims — the constitution-level mission of the organization.",
+    verbatim:"The Object of Rotary is to encourage and foster the ideal of service as a basis of worthy enterprise and, in particular, to encourage and foster:\n\nFIRST. The development of acquaintance as an opportunity for service;\n\nSECOND. High ethical standards in business and professions; the recognition of the worthiness of all useful occupations; and the dignifying of each Rotarian's occupation as an opportunity to serve society;\n\nTHIRD. The application of the ideal of service in each Rotarian's personal, business, and community life;\n\nFOURTH. The advancement of international understanding, goodwill, and peace through a world fellowship of business and professional persons united in the ideal of service.",
+    mnemonic:"A-E-S-P → Acquaintance, Ethics, Service-in-life, Peace. Memorise the verbs: develop, recognise, apply, advance.",
+    why:"If anyone asks you 'what IS Rotary trying to do?' — this is the answer. Officers are expected to quote at least the four headings." },
+
+  { id:"mission", cat:"identity", title:"Rotary's Mission Statement",
+    summary:"The one-sentence purpose statement.",
+    verbatim:"We provide service to others, promote integrity, and advance world understanding, goodwill, and peace through our fellowship of business, professional, and community leaders.",
+    why:"Notice the three verbs: provide, promote, advance. They map onto service, ethics, peace — the same trio as the Object." },
+
+  { id:"vision", cat:"identity", title:"Rotary's Vision Statement",
+    summary:"The forward-looking 'world we want to build' statement.",
+    verbatim:"Together, we see a world where people unite and take action to create lasting change — across the globe, in our communities, and in ourselves.",
+    pull:"Three scales of change: GLOBE → COMMUNITY → SELF. That last one ('in ourselves') is what makes Interact officer development part of the mission, not an afterthought." },
+
+  { id:"values", cat:"identity", title:"The Five Core Values",
+    summary:"What Rotarians commit to as members.",
+    items:["<strong>Fellowship</strong> — we build lifelong relationships","<strong>Integrity</strong> — we honor our commitments","<strong>Diversity</strong> — we connect diverse perspectives","<strong>Service</strong> — we apply our expertise to solve problems","<strong>Leadership</strong> — we are leaders who help other leaders"],
+    mnemonic:"<strong>F-I-D-S-L</strong> — \"Friends In Diverse Service Lead.\"",
+    why:"Expect the question 'Which core value matters most to you, and why?' Pick one, attach it to a personal story." },
+
+  { id:"motto", cat:"identity", title:"The Primary Motto: \"Service Above Self\"",
+    summary:"Adopted as the official primary motto in 1950 (Detroit Convention).",
+    pull:"\"<strong>Service Above Self</strong>\" — adopted 1950. Captures the central ethic of Rotary in three words. Use it any time an interviewer asks 'in one phrase, what is Rotary?'" },
+
+  { id:"motto2", cat:"identity", title:"Secondary Motto: \"One Profits Most Who Serves Best\"",
+    summary:"The older second motto, dating back to 1911.",
+    why:"Originally said as \"He profits most who serves best\" by Arthur Frederick Sheldon in 1910–11. The gender-neutral version was adopted in 2004. It comes from Rotary's vocational-service tradition: business success and serving others go together." },
+
+  { id:"size", cat:"identity", title:"Rotary by the Numbers",
+    summary:"Membership scale — be ready to cite.",
+    items:["Over <strong>1.2 million</strong> Rotarians globally","More than <strong>46,000</strong> Rotary clubs","<strong>14,911</strong> Interact clubs","<strong>342,953</strong> Interactors","Interact present in <strong>145</strong> countries"],
+    why:"Officers should be able to scale the picture: 'I'm joining a 1.2M-strong global network, not just a club at my school.'" },
+
+  // ── Areas of Focus ───────────────────────────────────────────
+  { id:"af-peace", cat:"focus", title:"1. Promoting Peace",
+    summary:"Cross-cultural understanding, refugee support, conflict mediation, leader training.",
+    pull:"Why it matters: <strong>Peace is the precondition for every other cause.</strong> Rotary funds Rotary Peace Fellowships at seven universities worldwide.",
+    related:"Peace Fellowships · Rotary Peace Centers" },
+
+  { id:"af-disease", cat:"focus", title:"2. Fighting Disease",
+    summary:"Built on the polio elimination effort. Now extends to malaria, HIV, maternal disease, and strengthening local health systems.",
+    pull:"The signature: <strong>polio</strong>. Rotary helped reduce polio-endemic countries from 125 in 1988 to just 2 today (Afghanistan and Pakistan)." },
+
+  { id:"af-water", cat:"focus", title:"3. Clean Water, Sanitation &amp; Hygiene (WASH)",
+    summary:"Improves water and sanitation access, especially in schools and healthcare facilities.",
+    pull:"Often abbreviated <strong>WASH</strong> (Water, Sanitation, Hygiene). The school-focus piece is what most Interact clubs actually contribute to." },
+
+  { id:"af-mch", cat:"focus", title:"4. Maternal &amp; Child Health",
+    summary:"Connects mothers and children to nutrition, healthcare, and sanitary resources.",
+    pull:"Worth remembering the framing: <strong>1 in 7 children</strong> in the developing world dies before age 5. Rotary's stated goal is to reduce that rate." },
+
+  { id:"af-ed", cat:"focus", title:"5. Supporting Basic Education &amp; Literacy",
+    summary:"Teacher training, adult literacy programs, scholarships.",
+    pull:"<strong>Two-thirds of the world's illiterate adults are women.</strong> Education projects often double as gender-equity projects." },
+
+  { id:"af-econ", cat:"focus", title:"6. Growing Local Economies",
+    summary:"Community development, microcredit, vocational training — especially for youth and women.",
+    pull:"This is where Rotary's <strong>business-and-professional</strong> identity shows through. Members teach what they already know." },
+
+  { id:"af-env", cat:"focus", title:"7. Protecting the Environment",
+    summary:"Added in 2020 as the 7th area of focus. Includes climate, biodiversity, ocean health.",
+    pull:"<strong>Newest area of focus (June 2020).</strong> If asked 'how is Rotary modernising?' — this is the example." },
+
+  { id:"af-polio", cat:"focus", title:"Bonus: Ending Polio (PolioPlus)",
+    summary:"Not technically a 7th-area but Rotary's flagship campaign, often listed alongside.",
+    pull:"PolioPlus launched <strong>1985</strong>. Partners: WHO, UNICEF, CDC, Gates Foundation. From <strong>350,000 cases/year in 1988</strong> to a handful today." },
+
+  // ── Five Avenues of Service ──────────────────────────────────
+  { id:"avenues", cat:"service", title:"The Five Avenues of Service",
+    summary:"Rotary's organising framework for how members serve. Different from the 7 Areas of Focus — the Areas are the WHAT, the Avenues are the HOW.",
+    items:["<strong>Club Service</strong> — keep the club running and welcoming","<strong>Vocational Service</strong> — serve through your profession with high ethics","<strong>Community Service</strong> — improve local life","<strong>International Service</strong> — extend humanitarian reach and goodwill","<strong>Youth / New Generations Service</strong> — empower young people"],
+    mnemonic:"<strong>C-V-C-I-Y</strong> — \"Clubs Volunteer, Cities Improve, Youth.\" Or remember 'one inward (Club), one professional (Vocational), three outward (Community/International/Youth).'",
+    why:"Interact maps directly to the <strong>Youth Service</strong> avenue — and an Interact officer is supposed to know they are the youth arm of a larger system." },
+
+  { id:"av-club", cat:"service", title:"Club Service",
+    summary:"Inward-facing. Keeps the club functioning: attendance, fellowship, member retention, meetings.",
+    pull:"For an Interact officer, club service = <strong>showing up, running meetings, recruiting and retaining</strong>. It is the most visible avenue of your role." },
+
+  { id:"av-vocational", cat:"service", title:"Vocational Service",
+    summary:"Serving others through one's profession and upholding high ethical standards in business.",
+    pull:"This is the avenue that connects Rotary back to its founding — Paul Harris's original idea: <strong>businesspeople of different vocations meeting weekly</strong>." },
+
+  { id:"av-community", cat:"service", title:"Community Service",
+    summary:"Local projects: clean-ups, tutoring, food drives, school partnerships.",
+    pull:"Interact's <strong>required local project</strong> falls under Community Service. It's the avenue where Interact clubs are most active day-to-day." },
+
+  { id:"av-intl", cat:"service", title:"International Service",
+    summary:"Cross-border projects, goodwill exchanges, supporting international causes.",
+    pull:"Interact's <strong>required international project</strong> is here. International doesn't have to mean travel — a fundraiser for an overseas school counts." },
+
+  { id:"av-youth", cat:"service", title:"Youth / New Generations Service",
+    summary:"Empowering young people through leadership, exchange, service. Added as the 5th avenue in 2010.",
+    pull:"This avenue exists <em>because</em> of Interact, Rotaract, RYLA, and Youth Exchange. As an Interact officer, you're the visible face of this entire avenue." },
+
+  // ── Four-Way Test ────────────────────────────────────────────
+  { id:"fwt", cat:"test", title:"The Four-Way Test",
+    summary:"Rotary's 24-word ethical code, applied to anything you 'think, say, or do.'",
+    verbatim:"Of the things we think, say, or do:\n\n1. Is it the TRUTH?\n2. Is it FAIR to all concerned?\n3. Will it build GOODWILL and BETTER FRIENDSHIPS?\n4. Will it be BENEFICIAL to all concerned?",
+    pull:"Created by <strong>Herbert J. Taylor</strong> in 1932 to save the bankrupt Club Aluminum Company. Adopted by Rotary in <strong>1943</strong>. Taylor became RI President in 1954–55.",
+    mnemonic:"<strong>T-F-G-B</strong> — Truth, Fair, Goodwill, Beneficial. Notice the order: facts first, then fairness, then relationships, then outcome." },
+
+  // ── Symbol ───────────────────────────────────────────────────
+  { id:"wheel", cat:"symbol", title:"The Rotary Wheel",
+    summary:"A 24-cogged, 6-spoked gearwheel with a central keyway — Rotary's emblem since 1923.",
+    items:["<strong>24 cogs</strong> — represent the workers / classifications","<strong>6 spokes</strong> — when designed in 1920, the 'Objects of Rotary' numbered 6","<strong>Keyway</strong> — added in 1923; turns the wheel from an 'idler' into a 'worker' that transmits power","Colors: <strong>royal azure blue and gold</strong>"],
+    pull:"Designed in 1920 by two Duluth Rotarian engineers, <strong>Charles Mackintosh and Oscar Bjorge</strong>. The keyway was added in 1923 — Rotarians wanted the wheel to do real work, not spin idly." },
+
+  // ── Interact specifics ───────────────────────────────────────
+  { id:"int-basics", cat:"interact", title:"Interact in One Card",
+    summary:"Interact = International Action. Rotary's service-club program for ages 12–18.",
+    items:["<strong>Age range:</strong> 12–18","<strong>Sponsored by:</strong> a local Rotary club (required)","<strong>Founded:</strong> 5 November 1962","<strong>First club:</strong> Interact Club of Melbourne High School, Florida, USA","<strong>Global scale:</strong> 14,911 clubs · 342,953 members · 145 countries"],
+    why:"Memorise the founding location — 'Melbourne, Florida, 1962' — it's an interview softball." },
+
+  { id:"int-name", cat:"interact", title:"Why \"Interact\"?",
+    summary:"The name was approved by the Rotary Board in 1962.",
+    pull:"\"Interact\" was coined to express \"<strong>inter</strong>-club and <strong>inter</strong>-member cooperation on all planes of activity — local, national, and international.\" Inter + Action.",
+    why:"If asked 'why is it called Interact?' — the answer is not 'because students interact.' It's about <strong>inter</strong>national + <strong>action</strong>." },
+
+  { id:"int-rule", cat:"interact", title:"The Two-Project Rule",
+    summary:"The core obligation every Interact club commits to.",
+    pull:"Every Interact club must complete <strong>at least two service projects each year</strong>: one that benefits its school or local community, and one that promotes international understanding.",
+    why:"If you're elected, this is your job description. Plan early — knowing exactly what your two projects will be is the strongest answer in an interview." },
+
+  { id:"int-sponsor", cat:"interact", title:"The Sponsor Relationship",
+    summary:"Every Interact club has a sponsoring Rotary club.",
+    items:["The Rotary club <strong>charters</strong> the Interact club","Rotary provides <strong>mentorship, funding, and a faculty/community advisor</strong>","Interactors are encouraged to <strong>attend Rotary meetings</strong> and to graduate into <strong>Rotaract</strong> at 18","The relationship is <strong>partnership</strong>, not parent-child"],
+    pull:"As Interact president, your most important external relationship is with the sponsoring Rotary club's <strong>youth services chair</strong>. Know their name." },
+
+  { id:"int-events", cat:"interact", title:"Key Interact Events",
+    summary:"The official events Interact clubs participate in.",
+    items:["<strong>World Interact Week</strong> — week of 5 November (Interact's founding date)","<strong>Interact Video Awards</strong> — annual project storytelling competition","<strong>Rotary Youth Day at the United Nations</strong>","<strong>Global Youth Service Day</strong> — coordinated with non-Rotary orgs"],
+    why:"World Interact Week is the easy one. Plan a project around it and you've satisfied half your annual obligation." },
+
+  // ── Bridge concepts ──────────────────────────────────────────
+  { id:"rotaract", cat:"interact", title:"What Comes After Interact?",
+    summary:"The Rotary family of programs ladders by age.",
+    items:["<strong>EarlyAct</strong> — ages 5–13 (elementary/middle school, not in every district)","<strong>Interact</strong> — ages 12–18","<strong>Rotaract</strong> — ages 18+ (no upper bound since 2019)","<strong>Rotary</strong> — adults (membership by invitation)"],
+    pull:"Knowing the <strong>full ladder</strong> shows you understand Interact as part of a lifelong commitment. Rotaract's age cap was removed in 2019." },
+];
+
+const PEOPLE = [
+  { id:"harris", cat:"people", title:"Paul P. Harris", role:"Founder of Rotary",
+    dates:"19 April 1868 – 27 January 1947",
+    summary:"Chicago attorney who founded Rotary because he missed the friendly small-town environment he'd grown up in. Wanted a club where professionals from different vocations could meet as friends.",
+    pull:"Born in Racine, Wisconsin; raised by grandparents in Vermont. <strong>Educated at Princeton, the University of Iowa, and the University of Vermont.</strong> Married Jean Thomson of Edinburgh in 1910.",
+    why:"In any interview about Rotary, you should be able to name Paul Harris and his one-line motivation: <em>friendship across vocations</em>." },
+
+  { id:"schiele", cat:"people", title:"Silvester Schiele", role:"First President, Rotary Club of Chicago",
+    dates:"1870 – 1945",
+    summary:"Coal dealer from Indiana. The first Rotarian after Harris himself, and the first elected president of the first Rotary club in 1905.",
+    pull:"Also served as <strong>RI Treasurer</strong> in 1945. Considered Harris's closest friend in those early years." },
+
+  { id:"shorey", cat:"people", title:"Hiram E. Shorey", role:"First Recording Secretary",
+    dates:"1862 – 1944",
+    summary:"Merchant tailor from Maine. Took the minutes at the first meeting on 23 February 1905.",
+    pull:"Often the trivia question: <strong>Who took the notes at the first Rotary meeting?</strong>" },
+
+  { id:"loehr", cat:"people", title:"Gustavus Loehr", role:"Host of the First Meeting",
+    dates:"1864 – 1918",
+    summary:"Mining engineer. Hosted the first meeting in his office, Room 711 of the Unity Building, Chicago.",
+    pull:"<strong>Room 711, Unity Building, Chicago, 23 February 1905</strong> — the address every Rotary trivia quiz asks about. Loehr was the host, Harris was the convener." },
+
+  { id:"taylor", cat:"people", title:"Herbert J. Taylor", role:"Author of the Four-Way Test",
+    dates:"1893 – 1978",
+    summary:"Chicago businessman who created the Four-Way Test in 1932 to save the bankrupt Club Aluminum Company. The company recovered; the test was adopted by Rotary in 1943.",
+    pull:"Served as <strong>President of Rotary International 1954–55</strong>. The 24-word test was originally a corporate ethics code, not a Rotary slogan." },
+
+  { id:"klumph", cat:"people", title:"Arch C. Klumph", role:"Founder of the Rotary Foundation",
+    dates:"1869 – 1951",
+    summary:"6th president of Rotary International (1916–17). Proposed an 'endowment fund for doing good in the world' that became the Rotary Foundation.",
+    pull:"Klumph proposed the Foundation in <strong>1917</strong> with an initial gift of <strong>$26.50</strong>. Today the Foundation manages a multi-billion-dollar endowment funding grants worldwide.",
+    why:"The Foundation = the money engine. If you're asked 'where does Rotary's funding come from?' — Arch Klumph and the Rotary Foundation." },
+
+  // ── Milestones (treated as cards too) ────────────────────────
+  { id:"m-1905", cat:"history", title:"23 February 1905 — The Founding",
+    role:"Milestone",
+    summary:"Paul Harris, Gustavus Loehr, Silvester Schiele, and Hiram Shorey meet in Loehr's office (Room 711, Unity Building, Chicago).",
+    pull:"The name <strong>Rotary</strong> came from the early practice of <strong>rotating meeting locations</strong> among members' offices. Once they had a permanent venue, the name stayed." },
+
+  { id:"m-1910", cat:"history", title:"1910 — National Association of Rotary Clubs",
+    role:"Milestone",
+    summary:"16 clubs federate. Paul Harris elected first president of the national association.",
+    pull:"Within 5 years of founding, Rotary had already organised itself into a multi-club federation. The first international club followed in 1910 (Winnipeg, Canada)." },
+
+  { id:"m-1917", cat:"history", title:"1917 — Birth of the Rotary Foundation",
+    role:"Milestone",
+    summary:"Arch Klumph proposes an endowment fund. Seeded with $26.50.",
+    pull:"Took until <strong>1928</strong> to be formally constituted as 'The Rotary Foundation.' Today it funds Global Grants, Peace Fellowships, and PolioPlus." },
+
+  { id:"m-1932", cat:"history", title:"1932 — Herbert Taylor Writes the Four-Way Test",
+    role:"Milestone",
+    summary:"Taylor takes over the failing Club Aluminum Company and writes 24 words to guide every business decision. The company recovers.",
+    pull:"Originally a <strong>corporate ethics code</strong>. Rotary adopted it in <strong>1943</strong>." },
+
+  { id:"m-1962", cat:"history", title:"5 November 1962 — Interact Founded",
+    role:"Milestone",
+    summary:"Interact Club of Melbourne High School (Florida, USA) is chartered. Sponsored by the Rotary Club of Melbourne.",
+    pull:"Within one year, <strong>177 clubs in 24 countries</strong>. Within two years, <strong>450 clubs in 32 countries</strong>. Fastest-growing program in Rotary history at the time." },
+
+  { id:"m-1968", cat:"history", title:"1968 — Rotaract Founded",
+    role:"Milestone",
+    summary:"The Rotaract Club of North Charlotte, North Carolina is the first chartered Rotaract club (13 March 1968). For ages 18+.",
+    pull:"In 2019 RI removed the <strong>upper age limit</strong> (was 30). Rotaract is now Rotary's main young-adult engagement program." },
+
+  { id:"m-1979", cat:"history", title:"1979 — Polio Vaccination Begins",
+    role:"Milestone",
+    summary:"Rotary's first polio immunisation project: 6 million children in the Philippines.",
+    pull:"This 1979 pilot becomes <strong>PolioPlus in 1985</strong>, which becomes the <strong>Global Polio Eradication Initiative in 1988</strong> with WHO, UNICEF, and CDC." },
+
+  { id:"m-1989", cat:"history", title:"1989 — Women Admitted to Rotary",
+    role:"Milestone",
+    summary:"The 1989 Council on Legislation removes 'male' from the membership requirement. (Following a 1987 US Supreme Court ruling against the Duarte, California club's expulsion for admitting women.)",
+    pull:"<strong>Sylvia Whitlock</strong> (Duarte, CA) became the first woman Rotary club president in 1987. Be prepared to discuss this as part of Rotary's modernisation story." },
+
+  { id:"m-2020", cat:"history", title:"2020 — Environment Becomes 7th Area of Focus",
+    role:"Milestone",
+    summary:"In June 2020 the Rotary Board adopts 'Supporting the environment' as the 7th area of focus.",
+    pull:"For 7 years (2013–2020) Rotary had <strong>6 areas</strong>. If you remember an older source saying 'the 6 areas of focus,' that's why." },
+];
+
+const PROGRAMS = [
+  { id:"p-interact", cat:"program", title:"Interact", audience:"Ages 12–18",
+    summary:"Rotary-sponsored service clubs for secondary-school students.",
+    items:["Sponsored and chartered by a Rotary club","Minimum 2 service projects/year (one local, one international)","Officers elected annually: typically President, VP, Secretary, Treasurer, Sergeant-at-Arms","World Interact Week in early November"] },
+
+  { id:"p-rotaract", cat:"program", title:"Rotaract", audience:"Ages 18+",
+    summary:"University-age and young-professional clubs. The next rung up from Interact.",
+    items:["Founded 1968","No upper age limit since 2019","Same emphasis on service + leadership + fellowship","Often the natural transition for Interactors at college"] },
+
+  { id:"p-ryla", cat:"program", title:"RYLA — Rotary Youth Leadership Awards", audience:"Ages 14–30",
+    summary:"Intensive leadership training programs run by Rotary districts — typically a multi-day camp or summit.",
+    pull:"As an Interact officer you are the most likely candidate to be <strong>nominated to RYLA</strong>. Ask your sponsoring Rotary club about the next session." },
+
+  { id:"p-yex", cat:"program", title:"Rotary Youth Exchange", audience:"Ages 15–19",
+    summary:"Cultural exchange — short-term (a few weeks) or long-term (an academic year) homestays in another country.",
+    items:["Runs in 100+ countries","Long-term exchanges include school attendance abroad","Administered by Rotary districts, not individual clubs"] },
+
+  { id:"p-foundation", cat:"program", title:"The Rotary Foundation", audience:"All Rotary",
+    summary:"Rotary's charitable arm. Funds Global Grants, District Grants, Peace Fellowships, and PolioPlus.",
+    pull:"Motto: <strong>\"Doing Good in the World.\"</strong> Founded by Arch Klumph in 1917. Donors who give $1,000+ become <strong>Paul Harris Fellows</strong>." },
+
+  { id:"p-polioplus", cat:"program", title:"PolioPlus", audience:"All Rotary",
+    summary:"Rotary's signature global health initiative. Launched 1985 as the world's first private-sector pledge to immunise all the world's children.",
+    items:["Partners: WHO, UNICEF, CDC, Gates Foundation","Reduced polio cases by >99.9% since 1988","Only <strong>Afghanistan</strong> and <strong>Pakistan</strong> remain endemic","Gates Foundation matches Rotary 2-to-1"] },
+
+  { id:"p-peace", cat:"program", title:"Rotary Peace Centers", audience:"Graduate students",
+    summary:"Fully-funded master's degrees in peace and conflict studies, hosted at 7 partner universities.",
+    items:["~130 Peace Fellows selected each year","Universities include Duke, Bradford, Tokyo, Uppsala, Queensland, Chulalongkorn, Makerere","Master's track + Professional Development Certificate track"],
+    why:"This is the prestige program. Knowing it exists signals you understand Rotary as more than 'community volunteering.'" },
+
+  { id:"p-phf", cat:"program", title:"Paul Harris Fellow", audience:"Donors",
+    summary:"Recognition for any individual who has contributed $1,000+ (cumulatively or in one gift) to the Rotary Foundation, or for whom that sum has been donated.",
+    pull:"Often given by clubs to honor non-Rotarian community partners. <strong>An Interact club can sponsor a PHF for a retiring teacher or principal</strong> — a high-impact 'thank you.'" },
+
+  { id:"p-wiw", cat:"program", title:"World Interact Week", audience:"Interact",
+    summary:"The week of 5 November (Interact's anniversary). Clubs run a coordinated project and report it.",
+    pull:"<strong>Calendar this NOW.</strong> Whatever your two annual projects are, time at least one to coincide with this week — it amplifies your reach via Rotary's global media." },
+
+  { id:"p-viw", cat:"program", title:"Interact Video Awards", audience:"Interact",
+    summary:"Annual short-video competition where Interact clubs tell the story of their projects.",
+    why:"A way to get global recognition without leaving your school. Filming your project means you finish it AND market it." },
+
+  { id:"p-un", cat:"program", title:"Rotary Day at the United Nations", audience:"All Rotary + Youth",
+    summary:"Annual event at UN Headquarters in New York, usually in early November. Hosted jointly by Rotary International and the UN.",
+    pull:"Rotary has held <strong>consultative status with the UN since 1947</strong> — among the very first NGOs to do so. Trivia gold." },
+];
+
+const QUOTES = [
+  { id:"q1", cat:"quote", title:"Service Above Self",
+    attribution:"Rotary's Primary Motto · adopted 1950",
+    text:"Service Above Self.",
+    note:"Three words. Use it whenever asked to summarise Rotary in one phrase." },
+
+  { id:"q2", cat:"quote", title:"One Profits Most Who Serves Best",
+    attribution:"Arthur Frederick Sheldon, 1910–11 · Rotary's Secondary Motto",
+    text:"One profits most who serves best.",
+    note:"Originally \"He profits most who serves best.\" The link between business success and ethical service is in Rotary's DNA." },
+
+  { id:"q3", cat:"quote", title:"Paul Harris on Rotary's measure",
+    attribution:"Paul P. Harris",
+    text:"Whatever Rotary may mean to us, to the world it will be known by the results it achieves.",
+    note:"Use this when an interviewer asks you 'why service-based leadership?' or 'what would you say to a skeptic about Interact?'" },
+
+  { id:"q4", cat:"quote", title:"Paul Harris on change",
+    attribution:"Paul P. Harris",
+    text:"This is a changing world; we must be prepared to change with it.",
+    note:"Useful framing for any question about modernising your club: new project ideas, new media, new partnerships." },
+
+  { id:"q5", cat:"quote", title:"The Four-Way Test (compact)",
+    attribution:"Herbert J. Taylor, 1932",
+    text:"Of the things we think, say, or do: (1) Is it the TRUTH? (2) Is it FAIR to all concerned? (3) Will it build GOODWILL and BETTER FRIENDSHIPS? (4) Will it be BENEFICIAL to all concerned?",
+    note:"Memorise in order. The pneumonic is T-F-G-B." },
+];
+
+const QUESTIONS = [
+  // ─── EASY ───
+  { id:1, diff:"easy", type:"mcq", cat:"identity",
+    q:"What is Rotary's primary motto?",
+    choices:["Doing Good in the World", "Service Above Self", "One World, One Family", "Profit With Purpose"],
+    ans:1,
+    expl:"\"Service Above Self\" was adopted as the official primary motto at the 1950 Detroit Convention. \"One Profits Most Who Serves Best\" is the secondary motto." },
+
+  { id:2, diff:"easy", type:"mcq", cat:"history",
+    q:"In what year was the first Rotary club founded?",
+    choices:["1885", "1905", "1917", "1932"],
+    ans:1,
+    expl:"23 February 1905 in Chicago. The other dates are: 1917 (Rotary Foundation), 1932 (Four-Way Test written)." },
+
+  { id:3, diff:"easy", type:"mcq", cat:"interact",
+    q:"What age range is Interact for?",
+    choices:["8–14", "12–18", "16–22", "18 and up"],
+    ans:1,
+    expl:"Interact is for ages 12–18 (secondary-school age). Rotaract is for 18+." },
+
+  { id:4, diff:"easy", type:"mcq", cat:"focus",
+    q:"How many official Areas of Focus does Rotary have?",
+    choices:["5", "6", "7", "8"],
+    ans:2,
+    expl:"Seven, since June 2020 when 'Supporting the environment' was added. From 2013–2020 there were 6." },
+
+  { id:5, diff:"easy", type:"mcq", cat:"history",
+    q:"Who founded Rotary?",
+    choices:["Herbert Taylor", "Arch Klumph", "Paul Harris", "Sylvester Schiele"],
+    ans:2,
+    expl:"Paul P. Harris, a Chicago attorney. The others are all important Rotarians but came later." },
+
+  { id:6, diff:"easy", type:"mcq", cat:"interact",
+    q:"How many service projects must an Interact club complete each year?",
+    choices:["At least one", "At least two (one local, one international)", "At least three", "There is no minimum"],
+    ans:1,
+    expl:"At least two projects per year: one benefiting the school or local community, and one promoting international understanding." },
+
+  { id:7, diff:"easy", type:"mcq", cat:"test",
+    q:"How many questions are in the Four-Way Test?",
+    choices:["3", "4", "5", "7"],
+    ans:1,
+    expl:"Four: Is it the truth? Is it fair? Will it build goodwill and friendships? Will it be beneficial to all?" },
+
+  // ─── MEDIUM ───
+  { id:8, diff:"medium", type:"mcq", cat:"test",
+    q:"What is the correct order of the Four-Way Test?",
+    choices:[
+      "Fair → Truth → Goodwill → Beneficial",
+      "Truth → Fair → Goodwill → Beneficial",
+      "Truth → Goodwill → Fair → Beneficial",
+      "Beneficial → Fair → Truth → Goodwill"],
+    ans:1,
+    expl:"Truth → Fair → Goodwill → Beneficial. T-F-G-B. Facts first, then fairness, then relationships, then outcomes." },
+
+  { id:9, diff:"medium", type:"mcq", cat:"history",
+    q:"Where was the first Interact club founded?",
+    choices:[
+      "Chicago, Illinois",
+      "Melbourne, Australia",
+      "Melbourne, Florida",
+      "Mumbai, India"],
+    ans:2,
+    expl:"The Interact Club of Melbourne High School, Melbourne, Florida, USA — chartered 5 November 1962. The Australian Melbourne is a frequent trick answer." },
+
+  { id:10, diff:"medium", type:"mcq", cat:"service",
+    q:"Which of these is NOT one of the Five Avenues of Service?",
+    choices:["Club Service", "Vocational Service", "Spiritual Service", "International Service"],
+    ans:2,
+    expl:"The five are: Club, Vocational, Community, International, Youth/New Generations. 'Spiritual' is not a Rotary avenue." },
+
+  { id:11, diff:"medium", type:"mcq", cat:"identity",
+    q:"Which of Rotary's core values appears alongside Fellowship, Integrity, Diversity, and Leadership?",
+    choices:["Innovation", "Service", "Excellence", "Faith"],
+    ans:1,
+    expl:"The five core values are Fellowship, Integrity, Diversity, Service, and Leadership." },
+
+  { id:12, diff:"medium", type:"mcq", cat:"focus",
+    q:"Which Area of Focus was added most recently?",
+    choices:["Promoting peace", "Supporting education", "Protecting the environment", "Maternal and child health"],
+    ans:2,
+    expl:"'Supporting the environment' was added in June 2020 as the 7th area of focus." },
+
+  { id:13, diff:"medium", type:"mcq", cat:"history",
+    q:"Why was the organisation named 'Rotary'?",
+    choices:[
+      "Because members rotated meeting locations among their offices",
+      "Because it represents the rotation of leadership",
+      "Because the founder owned a wheel-manufacturing company",
+      "Because of the rotating Rotary wheel emblem"],
+    ans:0,
+    expl:"In the earliest days, the small group rotated meetings among members' offices. The name stuck even after they moved to a permanent venue. The emblem came later." },
+
+  { id:14, diff:"medium", type:"mcq", cat:"program",
+    q:"Which Rotary program is for ages 18 and above?",
+    choices:["Interact", "EarlyAct", "Rotaract", "RYLA"],
+    ans:2,
+    expl:"Rotaract is for ages 18+. Interact is 12–18. RYLA is a leadership program (typically 14–30). EarlyAct is elementary/middle school." },
+
+  { id:15, diff:"medium", type:"mcq", cat:"identity",
+    q:"Roughly how many Interactors are there worldwide?",
+    choices:["~50,000", "~150,000", "~340,000", "~1 million"],
+    ans:2,
+    expl:"Approximately 342,953 Interactors in 14,911 clubs across 145 countries." },
+
+  { id:16, diff:"medium", type:"mcq", cat:"identity",
+    q:"What does the 'FIRST' object of Rotary emphasise?",
+    choices:[
+      "The development of acquaintance as an opportunity for service",
+      "High ethical standards in business",
+      "The application of service in personal and community life",
+      "The advancement of international understanding"],
+    ans:0,
+    expl:"In order: (1) Acquaintance, (2) High ethical standards, (3) Application in personal/community life, (4) International understanding." },
+
+  // ─── HARD ───
+  { id:17, diff:"hard", type:"mcq", cat:"history",
+    q:"Who wrote the Four-Way Test, and why?",
+    choices:[
+      "Paul Harris, to define Rotary's mission",
+      "Arch Klumph, as an ethical code for the Rotary Foundation",
+      "Herbert J. Taylor, to save a bankrupt company",
+      "Arthur F. Sheldon, as a vocational service motto"],
+    ans:2,
+    expl:"Herbert J. Taylor wrote it in 1932 when asked to take charge of the bankrupt Club Aluminum Company. He distilled corporate ethics into 24 words. Rotary adopted it in 1943." },
+
+  { id:18, diff:"hard", type:"mcq", cat:"symbol",
+    q:"What does the Rotary wheel emblem look like (since 1923)?",
+    choices:[
+      "24 cogs, 6 spokes, a keyway",
+      "12 cogs, 4 spokes, no keyway",
+      "19 cogs, 6 spokes, a keyway",
+      "24 cogs, 8 spokes, no keyway"],
+    ans:0,
+    expl:"24 cogs, 6 spokes, a keyway. The keyway (added 1923) makes the wheel a 'worker, not an idler.' The 6 spokes originally represented the 6 Objects of Rotary." },
+
+  { id:19, diff:"hard", type:"mcq", cat:"history",
+    q:"Who founded the Rotary Foundation, and with what initial gift?",
+    choices:[
+      "Paul Harris, with $1,000",
+      "Arch Klumph, with $26.50",
+      "Herbert Taylor, with $100",
+      "Silvester Schiele, with $50"],
+    ans:1,
+    expl:"Arch C. Klumph proposed the Foundation in 1917. The initial gift, from the Rotary Club of Kansas City, was $26.50." },
+
+  { id:20, diff:"hard", type:"mcq", cat:"program",
+    q:"PolioPlus was launched in:",
+    choices:["1979", "1985", "1988", "2000"],
+    ans:1,
+    expl:"PolioPlus launched in 1985, building on Rotary's 1979 Philippines vaccination project. The Global Polio Eradication Initiative followed in 1988." },
+
+  { id:21, diff:"hard", type:"mcq", cat:"focus",
+    q:"How many countries were polio-endemic in 1988 vs. today?",
+    choices:["125 → 2", "55 → 1", "200 → 5", "80 → 3"],
+    ans:0,
+    expl:"125 polio-endemic countries in 1988; today only Afghanistan and Pakistan remain endemic — a >99.9% reduction in cases." },
+
+  { id:22, diff:"hard", type:"mcq", cat:"history",
+    q:"In what year were women officially admitted to Rotary?",
+    choices:["1973", "1989", "1995", "2005"],
+    ans:1,
+    expl:"1989, after the 1987 US Supreme Court ruling against the expulsion of the Duarte, California club for admitting women. Sylvia Whitlock had already become the first woman Rotary club president in 1987." },
+
+  { id:23, diff:"hard", type:"mcq", cat:"history",
+    q:"In whose office did the first Rotary meeting take place?",
+    choices:[
+      "Paul Harris's law office",
+      "Silvester Schiele's coal office",
+      "Gustavus Loehr's mining engineering office",
+      "Hiram Shorey's tailor shop"],
+    ans:2,
+    expl:"Gustavus Loehr's office — Room 711 of the Unity Building, Chicago. Harris convened; Loehr hosted." },
+
+  { id:24, diff:"hard", type:"mcq", cat:"identity",
+    q:"The 'FOURTH' Object of Rotary is about:",
+    choices:[
+      "Membership growth",
+      "High ethical standards in business",
+      "Personal and community service",
+      "International understanding, goodwill, and peace"],
+    ans:3,
+    expl:"Fourth: 'The advancement of international understanding, goodwill, and peace through a world fellowship of business and professional persons united in the ideal of service.'" },
+
+  { id:25, diff:"hard", type:"mcq", cat:"program",
+    q:"How many Rotary Peace Centers are there?",
+    choices:["3", "5", "7", "10"],
+    ans:2,
+    expl:"Seven Peace Centers at partner universities including Duke, Bradford, Tokyo, Uppsala, Queensland, Chulalongkorn, and Makerere." },
+
+  // ─── OFFICER (free-response) ───
+  { id:26, diff:"officer", type:"fr", cat:"identity",
+    q:"\"Why do you want to be an Interact officer?\"",
+    framework:"Strong structure: (1) Personal hook — what got you into Interact (a specific project memory). (2) The gap you've noticed — what could be better in the club. (3) The contribution — concrete skills you bring (organisation, comms, recruitment). (4) Tie to Rotary's larger mission — Service Above Self, or one specific Area of Focus you care about. Avoid: generic 'I love helping people.' Always anchor in <em>specifics</em>.",
+    sample:"Sample close: \"I want to be Secretary because I noticed our project documentation gets lost between officer transitions. I've built shared trackers for two school groups already. If we can keep a record of every project, the next president starts with a portfolio — not a blank page. That's how Interact compounds.\"" },
+
+  { id:27, diff:"officer", type:"fr", cat:"focus",
+    q:"\"If elected, what two service projects would you lead this year?\"",
+    framework:"You must satisfy the two-project rule. (1) ONE local: pick something the school/community will see and that maps to a clear Area of Focus. (2) ONE international: it does NOT have to involve travel — a fundraiser, a partner-school correspondence, or a Global Grant contribution all qualify. Strong answer: <strong>name both, name the partner, name the timeline.</strong>",
+    sample:"Sample: \"Local — WASH-focused: install bottle-refill stations in 3 government schools nearby, partnering with our sponsoring Rotary club's water committee. International — UNICEF letter-writing + bake-sale supporting maternal health in Afghanistan, run during World Interact Week (early November).\"" },
+
+  { id:28, diff:"officer", type:"fr", cat:"test",
+    q:"\"Tell us about a time you applied the Four-Way Test in a real situation.\"",
+    framework:"They want a STORY, not the test recited. Pick a specific dilemma — disclosing a teammate's mistake, a fundraising claim that overstated impact, an event invite list. Walk through each of the four questions <em>against that situation</em>. End with what you actually did and what happened.",
+    sample:"Anchor: Pick one dilemma. Apply T-F-G-B in order. Land on a decision. Never abstract." },
+
+  { id:29, diff:"officer", type:"fr", cat:"service",
+    q:"\"Which of Rotary's 7 Areas of Focus matters most to you, and why?\"",
+    framework:"Pick ONE. Don't hedge. Connect to: (1) a personal observation in your community, (2) a stat or fact about Rotary's work there, (3) what you'd do as an Interact officer to advance it. Sample picks that interview well: WASH (concrete, school-relevant), Maternal & Child Health (data-rich), Environment (newest, modern). Avoid: 'all of them are important.'",
+    sample:"Sample close: \"Education, because the literacy gap in our district is something I see every week — and the Rotary stat that two-thirds of the world's illiterate adults are women lines up with what I see at our local government school. As an officer I'd run a weekly reading partnership.\"" },
+
+  { id:30, diff:"officer", type:"fr", cat:"interact",
+    q:"\"How would you grow the club's membership?\"",
+    framework:"Three levers: <strong>visibility</strong> (presence at school assemblies, social media), <strong>onboarding</strong> (every new member gets a first project within 4 weeks), <strong>retention</strong> (officer mentorship, public recognition). Cite Interact's global scale (14,911 clubs / 342k members) as proof you understand you're recruiting into something larger than the school.",
+    sample:"Strongest move: name a specific recruitment event you'd run in the first month and how you'd measure its success." },
+
+  // ─── DISTRICT 3012 HANDBOOK ───
+  { id:31, diff:"easy", type:"mcq", cat:"handbook",
+    q:"On what platform does District 3012 track Interact-club activity points for 2025-26?",
+    choices:["RotaryDirect", "GoSharpener", "MyRotary", "InteractHub"],
+    ans:1,
+    expl:"GoSharpener is the official technology and reporting partner. Schools post via a school ID; students keep separate individual portfolios." },
+
+  { id:32, diff:"easy", type:"mcq", cat:"handbook",
+    q:"By what date each month must schools upload activities to count for points?",
+    choices:["1st of the next month", "15th of the next month", "30th of the same month", "End of the quarter"],
+    ans:2,
+    expl:"30th of every month. Only exception: July activities may be uploaded up to 30 August." },
+
+  { id:33, diff:"medium", type:"mcq", cat:"handbook",
+    q:"Which hashtag is used for Blood Donation camp posts in District 3012?",
+    choices:["#SaveALife", "#RaktDaan", "#BloodDonation", "#DonateBlood"],
+    ans:2,
+    expl:"#BloodDonation. Points: 30 base for the activity + 2 Go Points per unit collected." },
+
+  { id:34, diff:"medium", type:"mcq", cat:"handbook",
+    q:"What hashtag does the Fundraiser activity use, and what is the higher-tier reward?",
+    choices:[
+      "#FunKaroRaiseKaro · 150 Go Points if you raise more than ₹50,000",
+      "#RaiseTheRoof · 100 Go Points for any amount",
+      "#FundForGood · 75 Go Points flat",
+      "#Daanveer · 200 Go Points if you raise above ₹1 lakh"],
+    ans:0,
+    expl:"#FunKaroRaiseKaro — 75 Go Points for raising up to ₹50K, 150 Go Points for exceeding ₹50K." },
+
+  { id:35, diff:"medium", type:"mcq", cat:"handbook",
+    q:"Which District 3012 activity maps to SDG 2 (Zero Hunger)?",
+    choices:["EKSHA", "Waste to Wow", "Project Annapoorna", "Unite to Empower"],
+    ans:2,
+    expl:"Project Annapoorna — ration kits, langars, 1-kg-per-student food drives. Hashtag #Annapoorna, 50 Go Points per activity." },
+
+  { id:36, diff:"medium", type:"mcq", cat:"handbook",
+    q:"For an Interact collaboration with a school in another country, how many Go Points does each collaborating school receive?",
+    choices:["10", "20", "50", "100"],
+    ans:2,
+    expl:"International collaboration: 50 Go Points per school. National collaboration: 20 Go Points per school. Hashtag #UniteToEmpower." },
+
+  { id:37, diff:"medium", type:"mcq", cat:"handbook",
+    q:"When is the Interact Video Contest submission deadline for District 3012?",
+    choices:["1 October", "1 November", "1 December", "1 January"],
+    ans:2,
+    expl:"Submit on rotary.org before 1 December. Hashtag #InteractKiVideo, 40 Go Points per entry." },
+
+  { id:38, diff:"medium", type:"mcq", cat:"handbook",
+    q:"What is the reward structure for a Health Care Camp held offline vs. online?",
+    choices:[
+      "50 offline · 20 online",
+      "30 offline · 10 online",
+      "100 offline · 50 online",
+      "20 offline · 50 online"],
+    ans:0,
+    expl:"#Healthcarecamp — 50 Go Points offline conduction, 20 Go Points online conduction." },
+
+  { id:39, diff:"hard", type:"mcq", cat:"handbook",
+    q:"Who serves as District Interact Chair for District 3012 in 2025-26?",
+    choices:["Eshika Dwivedi", "Shreem Singh", "Rachna Singh", "Amita Mohindru"],
+    ans:2,
+    expl:"Ms. Rachna Singh is the District Interact Chair. Eshika Dwivedi is DIR, Shreem Singh is DIS, Dr. Amita Mohindru is District Governor." },
+
+  { id:40, diff:"hard", type:"mcq", cat:"handbook",
+    q:"Which of these is NOT a District 3012 posting rule?",
+    choices:[
+      "Use original photos only (no Google images)",
+      "One clear photo per activity (multiple photos won't earn extra points)",
+      "Photos must include the GoSharpener backdrop",
+      "Each activity must be co-posted from the student's individual ID to count"],
+    ans:3,
+    expl:"School posts and student posts are independent — only the school-ID post earns school points. Student posts go only to individual portfolios (and earn 200 points there)." },
+
+  { id:41, diff:"officer", type:"fr", cat:"handbook",
+    q:"\"Walk us through how your club will plan its 2025-26 calendar against the District 3012 point system.\"",
+    framework:"Strong answer hits four beats: (1) <strong>Anchor events</strong> — World Interact Week (early Nov, #WorldInteractWeek) and Interact Video Contest (deadline 1 Dec, #InteractKiVideo). (2) <strong>Recurring high-value drives</strong> — pick at least one Fundraiser tier (#FunKaroRaiseKaro, 75/150 pts) and one Health Care Camp (#Healthcarecamp, 50 pts offline). (3) <strong>Monthly cadence</strong> — explicitly say you'll post by the 30th of every month so nothing lapses. (4) <strong>One collaboration</strong> — at least one #UniteToEmpower partnership, ideally international (50 pts) for the multiplier.",
+    sample:"Sample close: \"We'll lock dates by August: Annapoorna ration drive in September, EKSHA tutoring weekly through the term, a Health Care Camp in October, a #WorldInteractWeek service push in November, and our Interact video shipped by 25 November. Every post goes up by the 30th of the month — calendared, with one officer on upload duty.\"" },
+];
+
+const HANDBOOK = {
+  title: "Interact District 3012 Point System Handbook 2025–26",
+  partner: "In partnership with GoSharpener",
+  theme: "Team Influencers · One Team, One Dream",
+  pills: ["District 3012", "Rotary Year 2025–26", "GoSharpener · Impact Profile", "Service Above Self"],
+
+  leaders: [
+    { role: "District Governor", name: "Dr. Amita Mohindru" },
+    { role: "District Interact Chair", name: "Ms. Rachna Singh", contact: "9310009504 · rachna.interactchair3012@gmail.com" },
+    { role: "District Interact Representative (DIR)", name: "Itr. Eshika Dwivedi", contact: "8527009992 · eshikadir@gmail.com" },
+    { role: "District Interact Secretary (DIS)", name: "Itr. Shreem Singh", contact: "9910686017 · shreem9002@gmail.com" },
+    { role: "GoSharpener Representative", name: "Neha Bansiwal", contact: "8920695258 · neha.bansiwal@gosharpener.com" },
+  ],
+
+  flow: [
+    { step: "Collection", body: "Interact-member data is collected from each school." },
+    { step: "Planning",   body: "Planning, meeting and training slots are provided to schools." },
+    { step: "Posting",    body: "Students/club start posting activities on GoSharpener." },
+  ],
+
+  posting: [
+    "<strong>School ID</strong> is given to the Interact-club President (or school rep) for all official posting on GoSharpener.",
+    "<strong>Student IDs</strong> are separate — used only for individual portfolios and the Impact Profile; not connected to school posting.",
+    "Points are awarded only for what is posted from the <strong>school ID on the school page</strong>, with the correct hashtag.",
+    "Activities must be uploaded by the <strong>30th of every month</strong>. Exception: July activities may be submitted till <strong>30 August</strong>.",
+    "Each activity = one clear original photo (or video). Multiple photos of the same activity do <strong>not</strong> earn extra points.",
+    "Posts using <strong>Google images</strong> are rejected. Always use original photos with the <strong>GoSharpener backdrop</strong>.",
+    "File limits: images ≤ 5 MB, videos ≤ 50 MB. Videos can be horizontal or vertical.",
+    "Student posts on individual profiles earn 200 points per post (+20 after verification) — counted only for the student's own portfolio.",
+    "Final decision on all point and validation matters rests with the <strong>District Governor</strong>.",
+  ],
+
+  // The 10 activity heads from the 2025–26 handbook
+  activities: [
+    { name: "Health Care Camp", hashtag: "#Healthcarecamp",
+      points: "50 offline · 20 online", per: "per new activity",
+      objective: "General check-ups, dental/eye camps, hygiene, nutrition counselling, sanitary-pad distribution." },
+    { name: "Blood Donation Camp", hashtag: "#BloodDonation",
+      points: "30 base · +2 per unit", per: "per new activity",
+      objective: "Organised with a recognised blood bank or with GoSharpener; awareness via posters / social media." },
+    { name: "Collaboration (Unite to Empower)", hashtag: "#UniteToEmpower",
+      points: "20 per national school · 50 per international school", per: "per collaboration",
+      objective: "Joint projects with another Interact club — service, campaigns, buddy / cultural exchanges." },
+    { name: "EKSHA — Unite for Education", hashtag: "#IgnitetheMind",
+      points: "30", per: "per new activity",
+      objective: "Teaching, book/stationery donations, adult literacy, workshops at NGOs or govt schools; e.g. SDG teaching, Beti Bachao Beti Padhao." },
+    { name: "Fundraiser", hashtag: "#FunKaroRaiseKaro",
+      points: "75 (≤ ₹50K raised) · 150 (> ₹50K raised)", per: "per fundraiser",
+      objective: "Creative campaigns / events / drives supporting NGOs, healthcare, education, disaster relief or environment." },
+    { name: "Project Annapoorna", hashtag: "#Annapoorna",
+      points: "50", per: "per new activity",
+      objective: "Anti-hunger action — ration kits, langars, 1-kg-per-student food drives, NGO partnerships. Maps to SDG 2: Zero Hunger." },
+    { name: "SDG Impact Drive + Joy of Giving", hashtag: "#ActForSDGs",
+      points: "15 per online campaign · 20 per offline campaign / donation", per: "per campaign",
+      objective: "SDG-awareness campaigns (posters, reels, street plays, exhibits) plus clothes / toys donation drives." },
+    { name: "World Interact Week", hashtag: "#WorldInteractWeek",
+      points: "20", per: "per new activity",
+      objective: "Service / awareness / cultural events during the first week of November (Interact's founding week)." },
+    { name: "Interact Video Contest", hashtag: "#InteractKiVideo",
+      points: "40", per: "per entry",
+      objective: "Original video showcasing club projects. Submit on rotary.org before <strong>1 December</strong>." },
+    { name: "Waste to Wow", hashtag: "#WasteToWow",
+      points: "50", per: "per new activity",
+      objective: "Recycling / upcycling action — e-waste collection, eco-bricks, textile upcycling. Show what, how, impact." },
+  ],
+
+  internship: [
+    "<strong>GoSharpener Global Internship Program</strong> for higher-grade students who have an individual GoSharpener ID.",
+    "Awarded on the basis of <strong>individual</strong> sustainability posts — school-wide activities are not eligible.",
+    "Real-world projects with global partners (CRY, WaterAid, Saahas, and others). Certificate issued by the partner.",
+    "Invites go out via <strong>WhatsApp in April and May</strong>.",
+  ],
+};
+
+const HIGHYIELD = {
+  punch:[
+    "<strong>Rotary founded:</strong> 23 February 1905, Chicago, by <strong>Paul P. Harris</strong>. First meeting: Room 711, Unity Building.",
+    "<strong>Interact founded:</strong> 5 November 1962, <strong>Melbourne High School, Florida</strong>. Ages 12–18. Sponsored by a Rotary club.",
+    "<strong>Primary motto:</strong> Service Above Self. <strong>Secondary motto:</strong> One Profits Most Who Serves Best.",
+    "<strong>Four-Way Test (T-F-G-B):</strong> Truth → Fair → Goodwill & friendships → Beneficial. Written 1932 by <strong>Herbert J. Taylor</strong>, adopted by Rotary 1943.",
+    "<strong>Object of Rotary (A-E-S-P):</strong> Acquaintance · Ethics · Service-in-life · Peace.",
+    "<strong>Core values (F-I-D-S-L):</strong> Fellowship · Integrity · Diversity · Service · Leadership.",
+    "<strong>7 Areas of Focus:</strong> Peace · Disease · Water (WASH) · Maternal & Child Health · Education · Local Economies · Environment. (Environment added 2020.)",
+    "<strong>5 Avenues of Service:</strong> Club · Vocational · Community · International · Youth (New Generations).",
+    "<strong>Interact rule:</strong> At least 2 service projects/year — one local, one international.",
+    "<strong>Wheel emblem:</strong> 24 cogs, 6 spokes, keyway (added 1923). Designed by Mackintosh & Bjorge of Duluth.",
+    "<strong>Rotary Foundation:</strong> Founded 1917 by <strong>Arch Klumph</strong> with $26.50. Motto: 'Doing Good in the World.'",
+    "<strong>PolioPlus:</strong> Launched 1985. From 125 polio-endemic countries (1988) to just 2 today (Afghanistan, Pakistan).",
+    "<strong>Scale:</strong> 1.2M+ Rotarians · 46,000+ Rotary clubs · 14,911 Interact clubs · 342,953 Interactors · 145 countries.",
+    "<strong>The ladder:</strong> EarlyAct (5–13) → Interact (12–18) → Rotaract (18+) → Rotary.",
+    "<strong>UN partnership:</strong> Rotary has held consultative status with the UN since 1947.",
+  ],
+  fast:[
+    {q:"In one sentence — what is Rotary?", a:"A global service organisation of 1.2 million business, professional, and community leaders united by the motto 'Service Above Self.'"},
+    {q:"In one sentence — what is Interact?", a:"Rotary's secondary-school service-club program, for students aged 12–18, sponsored by a Rotary club, with a minimum of two projects per year (one local, one international)."},
+    {q:"What's the Four-Way Test?", a:"A 24-word ethical code by Herbert Taylor (1932), adopted by Rotary in 1943: Is it the truth? Is it fair to all concerned? Will it build goodwill and better friendships? Will it be beneficial to all concerned?"},
+    {q:"Why is it called 'Rotary'?", a:"Because the first members rotated their meetings among each others' offices."},
+    {q:"Why is Interact called 'Interact'?", a:"Inter (between) + Action — to express inter-club and inter-member cooperation on all planes: local, national, and international."},
+  ]
+};
+
+/* ──────────────────────────────────────────────────────────────────
+   STATE & RENDER
+   ────────────────────────────────────────────────────────────────── */
+
+let state = {
+  tab: "concepts",
+  filter: "all",
+  search: "",
+  quiz: null,   // { questions, idx, score, answers }
+};
+
+const TAB_ORDER = ["concepts","people","programs","quotes","quiz","highyield","handbook"];
+
+const CONCEPT_CATS = ["all","identity","focus","service","test","symbol","interact"];
+const PEOPLE_CATS  = ["all","people","history"];
+
+function el(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
+
+function escapeHtml(s){ return (s||"").replace(/[&<>]/g, c=>({ "&":"&amp;","<":"&lt;",">":"&gt;" }[c])); }
+
+function matchSearch(card, q){
+  if(!q) return true;
+  q = q.toLowerCase();
+  const hay = JSON.stringify(card).toLowerCase();
+  return hay.indexOf(q) !== -1;
+}
+
+function renderChips(){
+  const row = document.getElementById("chips-row");
+  row.innerHTML = "";
+  let cats = null;
+  if(state.tab === "concepts") cats = CONCEPT_CATS;
+  else if(state.tab === "people") cats = PEOPLE_CATS;
+  if(!cats){ row.style.display = "none"; return; }
+  row.style.display = "flex";
+  row.innerHTML = '<span class="chip-label">Filter</span>' + cats.map(c => {
+    const label = c === "all" ? "All" : c[0].toUpperCase()+c.slice(1);
+    const active = state.filter === c ? "active" : "";
+    return `<span class="chip ${active}" data-cat="${c}">${label}</span>`;
+  }).join("");
+  row.querySelectorAll(".chip").forEach(ch => {
+    ch.onclick = () => { state.filter = ch.dataset.cat; render(); };
+  });
+}
+
+function renderTabs(){
+  document.querySelectorAll(".tab").forEach(t => {
+    t.classList.toggle("active", t.dataset.tab === state.tab);
+    t.onclick = () => { state.tab = t.dataset.tab; state.filter="all"; state.quiz=null; render(); };
+  });
+  document.getElementById("ct-concepts").textContent = CONCEPTS.length;
+  document.getElementById("ct-people").textContent   = PEOPLE.length;
+  document.getElementById("ct-programs").textContent = PROGRAMS.length;
+  document.getElementById("ct-quotes").textContent   = QUOTES.length;
+  document.getElementById("ct-quiz").textContent     = QUESTIONS.length;
+}
+
+function conceptCard(c){
+  const tagLabel = c.cat[0].toUpperCase()+c.cat.slice(1);
+  let body = "";
+  if(c.summary) body += `<div class="field"><span class="val">${c.summary}</span></div>`;
+  if(c.verbatim){
+    body += `<div class="verbatim"><span class="lbl-v">Verbatim</span>${escapeHtml(c.verbatim).replace(/\n/g,"<br>")}</div>`;
+  }
+  if(c.items){
+    body += `<div class="field"><span class="lbl">Key</span><ul>${c.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  }
+  if(c.mnemonic) body += `<div class="pull"><strong>Mnemonic:</strong> ${c.mnemonic}</div>`;
+  if(c.pull) body += `<div class="pull">${c.pull}</div>`;
+  if(c.why) body += `<div class="field"><span class="lbl">Why it matters</span><span class="val">${c.why}</span></div>`;
+  if(c.related) body += `<div class="related">↳ ${c.related}</div>`;
+  return `<div class="card cat-${c.cat}">
+    <div class="meta"><span class="tag ${c.cat}">${tagLabel}</span></div>
+    <h3>${c.title}</h3>
+    ${body}
+  </div>`;
+}
+
+function personCard(p){
+  let body = "";
+  if(p.role)    body += `<div class="field"><span class="lbl">Role</span><span class="val">${p.role}</span></div>`;
+  if(p.dates)   body += `<div class="field"><span class="lbl">Dates</span><span class="val">${p.dates}</span></div>`;
+  if(p.summary) body += `<div class="field"><span class="val">${p.summary}</span></div>`;
+  if(p.pull)    body += `<div class="pull">${p.pull}</div>`;
+  if(p.why)     body += `<div class="field"><span class="lbl">Why care</span><span class="val">${p.why}</span></div>`;
+  const tagLabel = p.cat[0].toUpperCase()+p.cat.slice(1);
+  return `<div class="card cat-${p.cat}">
+    <div class="meta"><span class="tag ${p.cat}">${tagLabel}</span></div>
+    <h3>${p.title}</h3>
+    ${body}
+  </div>`;
+}
+
+function programCard(p){
+  let body = "";
+  if(p.audience) body += `<div class="field"><span class="lbl">Audience</span><span class="val">${p.audience}</span></div>`;
+  if(p.summary)  body += `<div class="field"><span class="val">${p.summary}</span></div>`;
+  if(p.items)    body += `<div class="field"><span class="lbl">Details</span><ul>${p.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  if(p.pull)     body += `<div class="pull">${p.pull}</div>`;
+  if(p.why)      body += `<div class="field"><span class="lbl">Why care</span><span class="val">${p.why}</span></div>`;
+  return `<div class="card cat-program">
+    <div class="meta"><span class="tag program">Program</span></div>
+    <h3>${p.title}</h3>
+    ${body}
+  </div>`;
+}
+
+function quoteCard(q){
+  return `<div class="card cat-quote">
+    <div class="meta"><span class="tag quote">Quote</span></div>
+    <h3>${q.title}</h3>
+    <div class="verbatim"><span class="lbl-v">${escapeHtml(q.attribution)}</span>"${escapeHtml(q.text)}"</div>
+    ${q.note ? `<div class="field"><span class="lbl">Use it</span><span class="val">${q.note}</span></div>` : ""}
+  </div>`;
+}
+
+function renderGrid(items, fmt){
+  const list = items.filter(c => matchSearch(c, state.search))
+                    .filter(c => state.filter==="all" || c.cat===state.filter);
+  if(list.length === 0){
+    return `<div class="placeholder"><h3>No matches.</h3><div>Try a different filter or search term.</div></div>`;
+  }
+  return `<div class="grid">${list.map(fmt).join("")}</div>`;
+}
+
+function renderConcepts(){
+  return `<div class="summary-bar"><h2>Concepts <span class="sublabel">— the canonical material every Interact officer should know</span></h2></div>
+          ${renderGrid(CONCEPTS, conceptCard)}`;
+}
+function renderPeople(){
+  return `<div class="summary-bar"><h2>People &amp; History <span class="sublabel">— the founders, the ethicists, the milestones</span></h2></div>
+          ${renderGrid(PEOPLE, personCard)}`;
+}
+function renderPrograms(){
+  return `<div class="summary-bar"><h2>Programs &amp; Initiatives <span class="sublabel">— the Rotary family of programs</span></h2></div>
+          <div class="grid">${PROGRAMS.filter(c=>matchSearch(c,state.search)).map(programCard).join("")}</div>`;
+}
+function renderQuotes(){
+  return `<div class="summary-bar"><h2>Quotes &amp; Mottos <span class="sublabel">— interview-ready lines, attributed and verbatim</span></h2></div>
+          <div class="grid">${QUOTES.filter(c=>matchSearch(c,state.search)).map(quoteCard).join("")}</div>`;
+}
+
+function renderHighYield(){
+  let html = `<div class="summary-bar"><h2>High-Yield <span class="sublabel">— the night-before crib sheet</span></h2></div>`;
+  html += `<div class="hy-card"><h3>The Punch List (memorise all 15)</h3><ol>${HIGHYIELD.punch.map(p=>`<li>${p}</li>`).join("")}</ol></div>`;
+  html += `<div class="hy-card"><h3>One-Sentence Answers (rehearse aloud)</h3>`;
+  html += HIGHYIELD.fast.map(f => `<div style="margin-bottom:14px;"><strong style="color:var(--rblue);">Q. ${f.q}</strong><br><span>A. ${f.a}</span></div>`).join("");
+  html += `</div>`;
+  return html;
+}
+
+function renderHandbook(){
+  const hb = HANDBOOK;
+
+  const banner = `<div class="hb-banner">
+    <h2>${hb.title}</h2>
+    <div class="sub">${hb.partner} · ${hb.theme}</div>
+    <div class="pills">${hb.pills.map(p=>`<span class="pill">${p}</span>`).join("")}</div>
+  </div>`;
+
+  const flow = `<div class="hb-section">
+    <h3>School Onboarding Flow</h3>
+    <div class="hb-flow">
+      ${hb.flow.map((s,i)=>`
+        <div class="hb-step">
+          <div class="num">${i+1}</div>
+          <h4>${s.step}</h4>
+          <p>${s.body}</p>
+        </div>`).join("")}
+    </div>
+  </div>`;
+
+  const rules = `<div class="hb-section">
+    <h3>How Posting &amp; Points Work</h3>
+    <div class="hb-rules">
+      <ul>${hb.posting.map(p=>`<li>${p}</li>`).join("")}</ul>
+      <div class="warn-line"><strong>Officer note:</strong> If a club misses the 30th-of-the-month cut-off, that month's activities don't earn points — there is no retro-upload window (except July ⇒ 30 August).</div>
+    </div>
+  </div>`;
+
+  const activities = `<div class="hb-section">
+    <h3>Point System — 2025-26 Activities</h3>
+    <div class="hb-table-wrap">
+      <table class="hb-table">
+        <thead>
+          <tr>
+            <th style="width:30%;">Activity</th>
+            <th style="width:18%;">Hashtag</th>
+            <th style="width:22%;">Go Points</th>
+            <th>Objective</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${hb.activities.map(a=>`
+            <tr>
+              <td><div class="activity">${a.name}</div></td>
+              <td><span class="hashtag">${a.hashtag}</span></td>
+              <td><div class="points">${a.points}<small>${a.per}</small></div></td>
+              <td>${a.objective}</td>
+            </tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+
+  const leaders = `<div class="hb-section">
+    <h3>District 3012 Leadership &amp; Points of Contact</h3>
+    <div class="hb-grid">
+      ${hb.leaders.map(l=>`
+        <div class="hb-mini">
+          <div class="role">${l.role}</div>
+          <h4>${l.name}</h4>
+          ${l.contact ? `<div class="meta-line">${l.contact}</div>` : ""}
+        </div>`).join("")}
+    </div>
+  </div>`;
+
+  const internship = `<div class="hb-section">
+    <h3>GoSharpener Global Internship Program</h3>
+    <div class="hb-rules">
+      <ul>${hb.internship.map(i=>`<li>${i}</li>`).join("")}</ul>
+    </div>
+  </div>`;
+
+  const sources = `<div class="hb-section">
+    <h3>Other Canonical Sources Behind This Prep</h3>
+    <div class="hb-rules">
+      <ul>
+        <li>rotary.org/en/our-causes (7 Areas of Focus)</li>
+        <li>rotary.org/en/get-involved/interact-clubs (Interact scale &amp; rules)</li>
+        <li>rotary.org/en/about-rotary (mission, vision, scale)</li>
+        <li>rotary.org/en/history-1962-interact-takes-action (Interact founding)</li>
+        <li>rotary.org/en/history-first-four-rotarians (founders)</li>
+        <li>rotary.org/en/history-how-rotary-emblem-evolved (wheel symbolism)</li>
+      </ul>
+    </div>
+  </div>`;
+
+  return `<div class="summary-bar">
+    <h2>Handbook Map <span class="sublabel">— District 3012 point system, contacts &amp; deadlines</span></h2>
+  </div>
+  ${banner}
+  ${flow}
+  ${rules}
+  ${activities}
+  ${leaders}
+  ${internship}
+  ${sources}`;
+}
+
+/* ─── Quiz ────────────────────────────────────────────────────── */
+
+function renderQuiz(){
+  if(!state.quiz){
+    return `<div class="summary-bar"><h2>Quiz <span class="sublabel">— drill until it's automatic</span></h2></div>
+    <div class="quiz-setup">
+      <h3>Pick your run</h3>
+      <div class="quiz-row">
+        <span class="qlbl">Category</span>
+        <span class="chips">
+          ${["all","identity","focus","service","test","interact","history","program","handbook"].map(c =>
+            `<span class="chip ${state.quizCat===c?'active':''}" data-qcat="${c}">${c==='all'?'All':c[0].toUpperCase()+c.slice(1)}</span>`
+          ).join("")}
+        </span>
+      </div>
+      <div class="quiz-row">
+        <span class="qlbl">Difficulty</span>
+        <span class="chips">
+          ${["all","easy","medium","hard","officer"].map(d =>
+            `<span class="chip ${state.quizDiff===d?'active':''}" data-qdiff="${d}">${d==='all'?'All':d[0].toUpperCase()+d.slice(1)}</span>`
+          ).join("")}
+        </span>
+      </div>
+      <div class="quiz-row">
+        <span class="qlbl">Length</span>
+        <span class="chips">
+          ${[10,20,"All"].map(n =>
+            `<span class="chip ${state.quizLen===n?'active':''}" data-qlen="${n}">${n}</span>`
+          ).join("")}
+        </span>
+      </div>
+      <div style="margin-top:18px;">
+        <button class="btn" id="quiz-start">Start quiz</button>
+      </div>
+    </div>`;
+  }
+
+  const q = state.quiz.questions[state.quiz.idx];
+  if(!q){
+    return renderQuizResult();
+  }
+  const total = state.quiz.questions.length;
+  const prog = ((state.quiz.idx)/total*100).toFixed(0);
+  const answered = state.quiz.answers[state.quiz.idx];
+
+  let choicesHtml = "";
+  if(q.type==="mcq"){
+    choicesHtml = `<div class="qchoices">${q.choices.map((c,i)=>{
+      let cls = "qchoice";
+      if(answered !== undefined){
+        if(i === q.ans) cls += " right";
+        else if(i === answered) cls += " wrong";
+      } else if(state.quiz.selected === i) cls += " selected";
+      return `<button class="${cls}" data-c="${i}"><span class="qletter">${String.fromCharCode(65+i)}</span><span>${c}</span></button>`;
+    }).join("")}</div>`;
+  } else {
+    // free-response
+    choicesHtml = `<div class="qfr">
+      <strong>Answer framework:</strong> ${q.framework}
+      ${q.sample ? `<div style="margin-top:10px;"><strong>Coaching:</strong> ${q.sample}</div>` : ""}
+    </div>`;
+  }
+
+  let expl = "";
+  if(answered !== undefined && q.type==="mcq"){
+    expl = `<div class="qexpl"><strong>${answered===q.ans?'Correct.':'Not quite.'}</strong> ${q.expl}</div>`;
+  }
+
+  return `<div class="summary-bar"><h2>Quiz <span class="sublabel">— ${state.quiz.idx+1} of ${total}</span></h2></div>
+  <div class="quiz-card">
+    <div class="qhead">
+      <span class="qnum">Q${state.quiz.idx+1}</span>
+      <span class="tag diff-${q.diff}">${q.diff}</span>
+      <span class="tag ${q.cat}">${q.cat}</span>
+      <span class="tag type-${q.type}">${q.type==="mcq"?"MCQ":"Free response"}</span>
+      <div class="qprog"><div style="width:${prog}%"></div></div>
+      <span class="qstreak">Score: ${state.quiz.score}/${state.quiz.idx + (answered!==undefined?1:0)}</span>
+    </div>
+    <div class="qprompt">${q.q}</div>
+    ${choicesHtml}
+    ${expl}
+    <div class="qactions">
+      <button class="btn ghost" id="quiz-exit">Exit quiz</button>
+      <button class="btn" id="quiz-next">${state.quiz.idx === total-1 ? "Finish" : "Next →"}</button>
+    </div>
+  </div>`;
+}
+
+function renderQuizResult(){
+  const total = state.quiz.questions.length;
+  const score = state.quiz.score;
+  const pct = total === 0 ? 0 : Math.round((score/total)*100);
+
+  // Category breakdown
+  const byCat = {};
+  state.quiz.questions.forEach((q,i)=>{
+    if(q.type !== "mcq") return;
+    byCat[q.cat] = byCat[q.cat] || { total:0, right:0 };
+    byCat[q.cat].total++;
+    if(state.quiz.answers[i] === q.ans) byCat[q.cat].right++;
+  });
+
+  let breakdown = "";
+  Object.keys(byCat).sort().forEach(cat => {
+    const c = byCat[cat];
+    breakdown += `<tr><td>${cat[0].toUpperCase()+cat.slice(1)}</td><td>${c.right}/${c.total}</td><td>${Math.round(c.right/c.total*100)}%</td></tr>`;
+  });
+
+  return `<div class="summary-result">
+    <h3>Quiz complete</h3>
+    <div class="score">${score}<span style="font-size:24px;color:var(--ink-mute);font-weight:600;"> / ${total}</span></div>
+    <div class="score-sub">${pct}% — ${pct>=80?'Officer-ready.': pct>=60?'Solid base. Drill the weak categories.':'Cycle through Concepts and High-Yield again.'}</div>
+    ${breakdown ? `<table><thead><tr><th>Category</th><th>Score</th><th>%</th></tr></thead><tbody>${breakdown}</tbody></table>` : ''}
+    <div style="margin-top:18px; display:flex; gap:10px;">
+      <button class="btn" id="quiz-restart">New quiz</button>
+      <button class="btn ghost" id="quiz-exit">Back to setup</button>
+    </div>
+  </div>`;
+}
+
+function setupQuizHandlers(){
+  document.querySelectorAll("[data-qcat]").forEach(c => c.onclick = ()=>{ state.quizCat = c.dataset.qcat; render(); });
+  document.querySelectorAll("[data-qdiff]").forEach(c => c.onclick = ()=>{ state.quizDiff = c.dataset.qdiff; render(); });
+  document.querySelectorAll("[data-qlen]").forEach(c => c.onclick = ()=>{ state.quizLen = c.dataset.qlen === "All" ? "All" : parseInt(c.dataset.qlen); render(); });
+
+  const start = document.getElementById("quiz-start");
+  if(start) start.onclick = () => {
+    let pool = QUESTIONS.filter(q=>{
+      if(state.quizCat && state.quizCat!=="all" && q.cat !== state.quizCat) return false;
+      if(state.quizDiff && state.quizDiff!=="all" && q.diff !== state.quizDiff) return false;
+      return true;
+    });
+    // shuffle
+    pool = pool.slice().sort(()=>Math.random()-0.5);
+    let n = state.quizLen === "All" ? pool.length : Math.min(state.quizLen || 10, pool.length);
+    if(n === 0){
+      alert("No questions match those filters. Loosen the filters.");
+      return;
+    }
+    state.quiz = { questions: pool.slice(0,n), idx:0, score:0, answers:[], selected:null };
+    render();
+  };
+
+  document.querySelectorAll(".qchoice").forEach(btn => {
+    btn.onclick = () => {
+      const q = state.quiz.questions[state.quiz.idx];
+      if(state.quiz.answers[state.quiz.idx] !== undefined) return; // already answered
+      const choice = parseInt(btn.dataset.c);
+      state.quiz.answers[state.quiz.idx] = choice;
+      if(choice === q.ans) state.quiz.score++;
+      render();
+    };
+  });
+
+  const next = document.getElementById("quiz-next");
+  if(next) next.onclick = () => {
+    const q = state.quiz.questions[state.quiz.idx];
+    if(q.type==="mcq" && state.quiz.answers[state.quiz.idx] === undefined){
+      // not answered yet — skip the question
+      state.quiz.answers[state.quiz.idx] = -1;
+    }
+    state.quiz.idx++;
+    render();
+  };
+
+  const exit = document.getElementById("quiz-exit");
+  if(exit) exit.onclick = () => { state.quiz = null; render(); };
+  const restart = document.getElementById("quiz-restart");
+  if(restart) restart.onclick = () => { state.quiz = null; render(); };
+}
+
+function render(){
+  renderTabs();
+  renderChips();
+  const root = document.getElementById("root");
+  switch(state.tab){
+    case "concepts":  root.innerHTML = renderConcepts(); break;
+    case "people":    root.innerHTML = renderPeople(); break;
+    case "programs":  root.innerHTML = renderPrograms(); break;
+    case "quotes":    root.innerHTML = renderQuotes(); break;
+    case "quiz":      root.innerHTML = renderQuiz(); setupQuizHandlers(); break;
+    case "highyield": root.innerHTML = renderHighYield(); break;
+    case "handbook":  root.innerHTML = renderHandbook(); break;
+  }
+}
+
+document.getElementById("searchbox").addEventListener("input", e => {
+  state.search = e.target.value;
+  render();
+});
+
+// keyboard shortcuts in quiz
+document.addEventListener("keydown", e => {
+  if(state.tab !== "quiz" || !state.quiz) return;
+  const q = state.quiz.questions[state.quiz.idx];
+  if(!q) return;
+  if(q.type==="mcq" && /^[a-d]$/i.test(e.key)){
+    const idx = e.key.toUpperCase().charCodeAt(0) - 65;
+    if(idx < q.choices.length && state.quiz.answers[state.quiz.idx] === undefined){
+      state.quiz.answers[state.quiz.idx] = idx;
+      if(idx === q.ans) state.quiz.score++;
+      render();
+    }
+  } else if(e.key === "Enter"){
+    document.getElementById("quiz-next")?.click();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
