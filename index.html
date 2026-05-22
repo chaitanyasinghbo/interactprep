@@ -140,6 +140,36 @@
   .tag.program  { background: var(--plum-bg);  color: var(--plum); }
   .tag.quote    { background: var(--gold-bg);  color: var(--gold); }
   .tag.handbook { background: #e6f5ed;         color: #0a8a55; }
+  .card.cat-debate::before    { background: var(--plum); }
+  .card.cat-interview::before { background: var(--rblue); }
+  .tag.debate    { background: var(--plum-bg);  color: var(--plum); }
+  .tag.interview { background: var(--rblue-bg); color: var(--rblue); }
+  .tag.role      { background: #f1f5f9;         color: var(--ink-soft); }
+  .debate-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  .debate-side { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px 12px; }
+  .debate-side.for     { border-left: 3px solid var(--emer); background: var(--emer-bg); }
+  .debate-side.against { border-left: 3px solid var(--cran); background: var(--cran-bg); }
+  .debate-side h5 { margin: 0 0 6px; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+  .debate-side.for h5     { color: var(--emer); }
+  .debate-side.against h5 { color: var(--cran); }
+  .debate-side ul { margin: 0; padding-left: 16px; font-size: 12.5px; color: var(--ink); line-height: 1.5; }
+  .debate-side li { margin-bottom: 4px; }
+  .section-divider {
+    margin: 26px 0 14px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--line);
+    font-size: 13px; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink);
+  }
+  .section-divider .sublabel {
+    font-weight: 500; letter-spacing: 0;
+    text-transform: none; color: var(--ink-soft);
+    font-size: 13px; margin-left: 6px;
+  }
+  .section-divider:first-of-type { margin-top: 8px; }
+  @media (max-width: 740px) {
+    .debate-split { grid-template-columns: 1fr; }
+  }
   .tag.diff-easy     { background: #ecfdf5; color: #047857; }
   .tag.diff-medium   { background: #eff6ff; color: #1d4ed8; }
   .tag.diff-hard     { background: #fef3c7; color: #92400e; }
@@ -370,6 +400,7 @@
     <div class="tab" data-tab="programs">Programs <span class="count" id="ct-programs"></span></div>
     <div class="tab" data-tab="quotes">Quotes &amp; Mottos <span class="count" id="ct-quotes"></span></div>
     <div class="tab" data-tab="quiz">Quiz <span class="count" id="ct-quiz"></span></div>
+    <div class="tab" data-tab="interview">Interview <span class="count" id="ct-interview"></span></div>
     <div class="tab" data-tab="highyield">High-Yield</div>
     <div class="tab" data-tab="handbook">Handbook Map</div>
   </nav>
@@ -525,6 +556,162 @@ const CONCEPTS = [
     summary:"The Rotary family of programs ladders by age.",
     items:["<strong>EarlyAct</strong> — ages 5–13 (elementary/middle school, not in every district)","<strong>Interact</strong> — ages 12–18","<strong>Rotaract</strong> — ages 18+ (no upper bound since 2019)","<strong>Rotary</strong> — adults (membership by invitation)"],
     pull:"Knowing the <strong>full ladder</strong> shows you understand Interact as part of a lifelong commitment. Rotaract's age cap was removed in 2019." },
+
+  // ── From the official Interact Handbooks (RI 2022 + 2007) ────
+  { id:"int-purpose", cat:"interact", title:"Interact's Constitutional Purpose",
+    summary:"The one-sentence purpose written into the Standard Interact Club Constitution (Article II).",
+    verbatim:"The purpose of Interact is to provide opportunity for young people to work together in a world fellowship dedicated to service and international understanding.",
+    why:"This is the <strong>legal-document version</strong> of Interact's mission. Quote it when asked 'what is Interact's purpose?' — it carries more weight than a paraphrase." },
+
+  { id:"int-9goals", cat:"interact", title:"The 9 Goals of Interact (Constitution, Article II)",
+    summary:"Every chartered Interact club commits to these nine goals.",
+    items:[
+      "Recognize and develop <strong>constructive leadership</strong> and personal integrity",
+      "Encourage and practice <strong>thoughtfulness and helpfulness</strong> to others",
+      "Create an awareness of the importance of <strong>home and family</strong>",
+      "Build <strong>respect for the rights of others</strong>, based on the worth of each individual",
+      "Emphasize <strong>individual responsibility</strong> as the basis of personal success and group achievement",
+      "Develop <strong>life skills</strong> — self-development, time management, personal finances",
+      "Recognize the <strong>dignity and value of all useful occupations</strong> as opportunities to serve society",
+      "Open knowledge and understanding of <strong>community, national, and world affairs</strong>",
+      "Advance <strong>international understanding and goodwill</strong> toward all peoples"
+    ],
+    why:"Officers should be able to name at least three. Goal #6 (life skills) and goal #7 (dignity of all occupations) are the ones interviewers love because they tie Interact to Rotary's Vocational Service avenue." },
+
+  { id:"int-seven-steps", cat:"interact", title:"Seven Steps to Start an Interact Club",
+    summary:"The official sequence from the 2022 Interact Handbook.",
+    items:[
+      "<strong>Find a sponsor and adviser</strong> — at least one Rotary club must sponsor; up to 3 co-sponsors allowed",
+      "<strong>Customise your club</strong> — school-based or community-based, age range, meeting format",
+      "<strong>Recruit members</strong> — flyers, social media, partner with school faculty",
+      "<strong>Determine governance</strong> — adopt the Standard Interact Club Constitution + write bylaws",
+      "<strong>Elect a board</strong> — President, Vice-President, Secretary, Treasurer (minimum)",
+      "<strong>Make it official</strong> — complete the Interact Club Certification Form, email to interact@rotary.org. No fee.",
+      "<strong>Celebrate</strong> — charter ceremony when the Certificate of Organization arrives (4–6 weeks)"
+    ],
+    mnemonic:"S-C-R-G-E-O-C → Sponsor, Customise, Recruit, Govern, Elect, Officialise, Celebrate.",
+    why:"Officers being asked 'how would you start a new Interact club at another school?' should walk through these seven steps in order." },
+
+  { id:"int-rules", cat:"interact", title:"Hard Rules from the Standard Constitution",
+    summary:"Non-negotiable operating requirements every Interact club is bound to.",
+    items:[
+      "Club meets <strong>at least twice per month</strong>",
+      "Board meets <strong>at least once per month</strong>",
+      "Each member must attend at least <strong>60% of regularly scheduled meetings</strong>",
+      "<strong>Minimum 15 charter members</strong> recommended (not mandated) to charter a new club",
+      "All elections by <strong>simple majority</strong>; voting is <strong>anonymous</strong>",
+      "Term of office is <strong>one year</strong> unless bylaws specify shorter (no shorter without written RI permission)",
+      "Membership terminated for cause requires <strong>2/3 vote</strong> of members in good standing",
+      "Bylaws can be amended by <strong>majority vote + 14 days' notice + sponsor Rotary club approval</strong>"
+    ],
+    why:"These are the numbers that turn into trivia: <strong>2/month, 60%, 15, 2/3, 14 days, 1 year</strong>. Memorise them — they're cited verbatim in the constitution." },
+
+  { id:"int-committees", cat:"interact", title:"The Four Standing Committees",
+    summary:"Every Interact club is required to maintain four committees (Constitution Article VIII; By-Laws Article V).",
+    items:[
+      "<strong>International Understanding</strong> — plans at least one major activity per year promoting international goodwill; involves most/all members",
+      "<strong>Service</strong> — organises at least one major school or community service project per year; involves most/all members",
+      "<strong>Finance</strong> — develops the plan to fund all club activities; keeps dues low",
+      "<strong>Club</strong> — handles attendance, membership, programs, fellowship, public relations"
+    ],
+    mnemonic:"<strong>I-S-F-C</strong> → \"International Service Funds Club.\" Two of the four (International + Service) directly satisfy the two-project rule.",
+    why:"If an interviewer asks 'how is an Interact club organised?' — Board of 4 officers + these 4 committees is the full answer." },
+
+  { id:"int-service-learning", cat:"service", title:"Service-Learning: The 5-Step Method",
+    summary:"Rotary's official project framework (developed with the National Youth Leadership Council).",
+    items:[
+      "<strong>Investigation</strong> — research the community need and its causes",
+      "<strong>Planning &amp; Preparation</strong> — clear goals, timelines, roles, follow-up plans",
+      "<strong>Action</strong> — direct, indirect, or advocacy service; collect impact data as you go",
+      "<strong>Reflection</strong> — what worked, what didn't, what you learned (runs through every step, not just the end)",
+      "<strong>Demonstration</strong> — show the impact to others and share recommendations"
+    ],
+    mnemonic:"<strong>I-P-A-R-D</strong> → \"Investigate, Plan, Act, Reflect, Demonstrate.\" Reflection is the verb that repeats — it's continuous, not terminal.",
+    why:"When asked 'walk me through how you'd run a service project' — don't say 'pick a cause and do it.' Walk through these five steps." },
+
+  { id:"int-service-types", cat:"service", title:"Three Types of Service",
+    summary:"Every Interact project falls into one of three modes.",
+    items:[
+      "<strong>Direct service</strong> — working face-to-face with the people who benefit (tutoring, meal delivery, oral-history interviews)",
+      "<strong>Indirect service</strong> — supporting people without contact (cleaning a playground, fundraising, collecting books)",
+      "<strong>Advocacy</strong> — raising awareness or shifting policy (speaking at council, anti-polio public campaign)"
+    ],
+    pull:"Strong project portfolios mix all three. <strong>Direct</strong> is high-empathy but small-scale; <strong>indirect</strong> scales well; <strong>advocacy</strong> compounds.",
+    why:"If asked 'which kind of service is best?' — there is no single answer. The right answer is 'depends on the need; here's when I'd choose each.'" },
+
+  { id:"int-citation", cat:"interact", title:"Rotary Citation for Interact Clubs",
+    summary:"RI's annual recognition for high-performing Interact clubs.",
+    items:[
+      "Choose at least <strong>11 of 20 goals</strong> across membership, service, leadership, fundraising, and brand use",
+      "Rotary year runs <strong>1 July – 30 June</strong>",
+      "Submit the nomination form by <strong>15 August</strong> following the year",
+      "Filed by the sponsor Rotary club officers or Interact club adviser"
+    ],
+    pull:"This is the <strong>scoreboard</strong> for an Interact officer. Mention it when asked 'how would you measure success this year?' — choosing the 11 goals at the start of your term gives you a year-long plan.",
+    why:"Most officers don't know the Citation exists. Naming it signals you've actually read the handbook." },
+
+  { id:"int-district", cat:"interact", title:"District-Level Roles That Support Your Club",
+    summary:"Clubs are grouped into 500+ Rotary districts. Each district has a team backing Interact.",
+    items:[
+      "<strong>District Governor</strong> — approves new Interact clubs and their sponsors; appoints the Interact Chair",
+      "<strong>District Interact Chair</strong> — Rotarian or Rotaractor who runs the district Interact program",
+      "<strong>District Interact Representative (DIR)</strong> — an Interactor elected by the Interactors in the district; co-chairs the committee",
+      "<strong>District Interact Committee</strong> — Rotarians + Rotaractors + Interactors who oversee training, growth, and youth protection",
+      "<strong>District Youth Protection Officer</strong> — advises on safety policies",
+      "<strong>District Alumni Chair</strong> — helps graduating Interactors transition to Rotaract"
+    ],
+    pull:"As an officer, your most useful district contact is the <strong>DIR</strong> — they're the elected peer voice for all Interactors in your district. Find their name. Email them.",
+    why:"Beyond the district: clubs are grouped into <strong>30+ zones</strong> globally, then up to Rotary International staff in Evanston, Illinois." },
+
+  { id:"int-sponsor-deep", cat:"interact", title:"What Your Sponsor Rotary Club Owes You",
+    summary:"The sponsor relationship has explicit obligations on both sides.",
+    items:[
+      "Provide an <strong>Interact adviser</strong> (reported annually to RI by name)",
+      "Have a Rotary member <strong>attend every board meeting</strong> (and every regular meeting for community-based clubs)",
+      "<strong>Train</strong> Interact members, officers, and committee chairs",
+      "Appoint <strong>mentors</strong> for your club",
+      "Invite Interactors to <strong>Rotary meetings, projects, and district events</strong>",
+      "Connect you to <strong>RYLA, Rotary Youth Exchange</strong>, and the wider Rotary network"
+    ],
+    pull:"<strong>The rule:</strong> in a community-based club, no club or board meeting is official without a sponsor-club member present. In a school-based club, that requirement applies to board meetings only.",
+    why:"If your sponsor club isn't showing up, the relationship needs a reset — schedule a meeting with their youth services chair." },
+
+  { id:"int-joint", cat:"interact", title:"Joint &amp; Multi-Sponsorship",
+    summary:"Multiple Rotary clubs can co-sponsor a single Interact club.",
+    items:[
+      "Up to <strong>3 Rotary or Rotaract clubs</strong> can co-sponsor (at least one must be a Rotary club)",
+      "The <strong>District Governor must approve</strong> joint sponsorship in writing",
+      "Sponsors must show that separate clubs would <strong>split a single body of students</strong>",
+      "A <strong>joint Interact committee</strong> is formed with members from each sponsor"
+    ],
+    why:"This is the workaround when two Rotary clubs both want to claim the same school. The committee structure prevents the Interact club from being torn between sponsors." },
+
+  { id:"int-adviser", cat:"interact", title:"What an Interact Adviser Does",
+    summary:"The adviser is appointed by the sponsor, not elected by the club.",
+    items:[
+      "Oversee <strong>day-to-day club activities</strong> and attend board meetings",
+      "Be the <strong>liaison</strong> between the club, the sponsor Rotary club, and the district",
+      "Ensure <strong>Rotary's youth protection policies</strong> are followed (screened and vetted before appointment)",
+      "<strong>Report club officers</strong> and contact information to RI annually",
+      "Counsel on <strong>service projects and fundraisers</strong>",
+      "Help <strong>graduating Interactors</strong> transition to Rotaract"
+    ],
+    pull:"Advisers can be a Rotarian, a Rotaractor, a teacher, a parent, or any vetted community volunteer. Only <strong>one</strong> can be officially reported to RI per year — but clubs can benefit from informally having more than one." },
+
+  { id:"int-after-deep", cat:"interact", title:"Beyond Interact: Rotary's Full Pipeline",
+    summary:"What Rotary offers after you age out of Interact.",
+    items:[
+      "<strong>Rotaract</strong> (18+) — service + leadership + fellowship; no upper age limit since 2019",
+      "<strong>Rotary Peace Fellowships</strong> — fully-funded master's at 7 Peace Centers",
+      "<strong>New Generations Service Exchange</strong> — short-term humanitarian/vocational exchange for university students and professionals up to age 30",
+      "<strong>Rotary Action Groups</strong> — global expert networks by topic (peace, water, environment, addiction, etc.)",
+      "<strong>Rotary Community Corps (RCC)</strong> — volunteer groups sponsored by a Rotary club; 11,000+ globally",
+      "<strong>Rotary Friendship Exchange</strong> — international home-hosting exchange for Rotarians and friends",
+      "<strong>Alumni groups</strong> — every former Interactor is automatically a Rotary alumnus",
+      "Eventually: <strong>Rotary club membership</strong>"
+    ],
+    pull:"Use this when asked 'what's next for you after Interact?' — the right answer is never 'I don't know.' Pick one (Rotaract is the obvious bridge) and name it specifically.",
+    why:"Showing that you see Interact as the <em>first step</em> in a 60-year pipeline, not a high-school extracurricular, lands better than any club anecdote." },
 ];
 
 const PEOPLE = [
@@ -652,6 +839,31 @@ const PROGRAMS = [
   { id:"p-un", cat:"program", title:"Rotary Day at the United Nations", audience:"All Rotary + Youth",
     summary:"Annual event at UN Headquarters in New York, usually in early November. Hosted jointly by Rotary International and the UN.",
     pull:"Rotary has held <strong>consultative status with the UN since 1947</strong> — among the very first NGOs to do so. Trivia gold." },
+
+  // ── Programs surfaced by the 2022/2007 Interact Handbooks ────
+  { id:"p-ngse", cat:"program", title:"New Generations Service Exchange", audience:"Up to age 30",
+    summary:"Short-term, customisable international exchange for university students and young professionals — humanitarian or vocational focus.",
+    pull:"Think of it as Rotary Youth Exchange's <strong>older sibling</strong>. Not a year-abroad — a few weeks of focused service or vocational learning.",
+    why:"Mention this when an interviewer asks 'what's next after Interact for someone who wants international experience but is past Youth Exchange?'" },
+
+  { id:"p-rag", cat:"program", title:"Rotary Action Groups", audience:"All Rotary",
+    summary:"Independent, Rotary-affiliated expert networks built around a specific cause — peace, addiction prevention, environment, water, microfinance, and more.",
+    pull:"<strong>Use case:</strong> if your club is planning a niche project (mental health, food security, e-waste) — the matching Action Group already has experts, partners, and project blueprints.",
+    why:"Officers who name a relevant Action Group when describing a project sound dramatically more prepared than those who don't." },
+
+  { id:"p-rcc", cat:"program", title:"Rotary Community Corps (RCC)", audience:"Non-Rotarian volunteers",
+    summary:"Volunteer groups sponsored by a Rotary club, made up of non-Rotarians who share Rotary's commitment to service.",
+    items:["More than <strong>11,000 RCCs</strong> active worldwide","Sponsored by a Rotary club but composed of community volunteers","Common partners for Rotary-Interact joint projects"],
+    why:"If your Interact club partners with a local NGO that has a Rotary connection, it's often an RCC. Knowing the term turns a vague partnership into a named one." },
+
+  { id:"p-friendship", cat:"program", title:"Rotary Friendship Exchange", audience:"Rotarians + friends",
+    summary:"International home-hosting exchange where participants take turns hosting each other in their homes and clubs.",
+    pull:"Open to <strong>individuals, couples, families, or groups</strong> — and participants don't have to be Rotarians. Often a gateway for Interactors' families into the wider Rotary world." },
+
+  { id:"p-citation", cat:"program", title:"Rotary Citation for Interact Clubs", audience:"Interact clubs",
+    summary:"Annual RI recognition for Interact clubs that hit at least 11 of 20 published goals during the Rotary year (1 July – 30 June).",
+    items:["Goals span <strong>membership, service, leadership development, brand use, Foundation contributions</strong>","Sponsor club officers or club adviser submit the nomination form","Deadline: <strong>15 August</strong> following the Rotary year"],
+    pull:"<strong>For officers:</strong> the Citation worksheet is the best annual planning tool RI publishes. Pick your 11 goals at the start of your term and the year writes itself." },
 ];
 
 const QUOTES = [
@@ -679,6 +891,16 @@ const QUOTES = [
     attribution:"Herbert J. Taylor, 1932",
     text:"Of the things we think, say, or do: (1) Is it the TRUTH? (2) Is it FAIR to all concerned? (3) Will it build GOODWILL and BETTER FRIENDSHIPS? (4) Will it be BENEFICIAL to all concerned?",
     note:"Memorise in order. The pneumonic is T-F-G-B." },
+
+  { id:"q6", cat:"quote", title:"Interact's Stated Purpose",
+    attribution:"Standard Interact Club Constitution, Article II",
+    text:"The purpose of Interact is to provide opportunity for young people to work together in a world fellowship dedicated to service and international understanding.",
+    note:"The constitutional purpose. Heavier than any paraphrase — quote it word-for-word." },
+
+  { id:"q7", cat:"quote", title:"On Empowering Youth",
+    attribution:"Interact Handbook (RI, 2007) · on the founding of Interact",
+    text:"Recognizing the untapped potential of young men and women, RI President Harold T. Thomas urged Rotary clubs around the world to find ways to encourage service among youth, foster their active interest in the community, and offer opportunities for them to develop as leaders.",
+    note:"Use this if asked 'why does Rotary care about Interact?' — it's the founding rationale, in RI's own words." },
 ];
 
 const QUESTIONS = [
@@ -974,6 +1196,342 @@ const QUESTIONS = [
     q:"\"Walk us through how your club will plan its 2025-26 calendar against the District 3012 point system.\"",
     framework:"Strong answer hits four beats: (1) <strong>Anchor events</strong> — World Interact Week (early Nov, #WorldInteractWeek) and Interact Video Contest (deadline 1 Dec, #InteractKiVideo). (2) <strong>Recurring high-value drives</strong> — pick at least one Fundraiser tier (#FunKaroRaiseKaro, 75/150 pts) and one Health Care Camp (#Healthcarecamp, 50 pts offline). (3) <strong>Monthly cadence</strong> — explicitly say you'll post by the 30th of every month so nothing lapses. (4) <strong>One collaboration</strong> — at least one #UniteToEmpower partnership, ideally international (50 pts) for the multiplier.",
     sample:"Sample close: \"We'll lock dates by August: Annapoorna ration drive in September, EKSHA tutoring weekly through the term, a Health Care Camp in October, a #WorldInteractWeek service push in November, and our Interact video shipped by 25 November. Every post goes up by the 30th of the month — calendared, with one officer on upload duty.\"" },
+
+  // ─── FROM THE RI INTERACT HANDBOOKS (2022 + 2007) ───
+  { id:42, diff:"easy", type:"mcq", cat:"interact",
+    q:"How often must an Interact club meet, per the Standard Interact Club Constitution?",
+    choices:["Once a year", "Once a month", "At least twice a month", "Every week without exception"],
+    ans:2,
+    expl:"At least twice per month. The board must also meet at least once a month." },
+
+  { id:43, diff:"easy", type:"mcq", cat:"interact",
+    q:"What is the minimum attendance each Interact member must meet?",
+    choices:["40% of scheduled meetings", "50% of scheduled meetings", "60% of scheduled meetings", "75% of scheduled meetings"],
+    ans:2,
+    expl:"60% of regularly scheduled meetings, as set by Article IV of the Standard Interact Club Constitution. Falling below this can terminate membership unless excused by the board." },
+
+  { id:44, diff:"medium", type:"mcq", cat:"interact",
+    q:"How many Rotary or Rotaract clubs can co-sponsor a single Interact club?",
+    choices:["Only 1", "Up to 3 (at least one must be a Rotary club)", "Up to 5", "Unlimited"],
+    ans:1,
+    expl:"Up to three Rotary or Rotaract clubs may co-sponsor — but at least one must be a Rotary club. The district governor must approve joint sponsorship in writing." },
+
+  { id:45, diff:"medium", type:"mcq", cat:"interact",
+    q:"Which of these is NOT one of the four standing committees of an Interact club?",
+    choices:["International Understanding", "Service", "Public Image", "Finance"],
+    ans:2,
+    expl:"The four standing committees are International Understanding, Service, Finance, and Club. Public-image work falls under the Club committee." },
+
+  { id:46, diff:"medium", type:"mcq", cat:"service",
+    q:"In Rotary's service-learning framework, which step does NOT belong?",
+    choices:["Investigation", "Planning and Preparation", "Negotiation", "Reflection"],
+    ans:2,
+    expl:"The five steps are: Investigation, Planning & Preparation, Action, Reflection, and Demonstration. 'Negotiation' is not one of them." },
+
+  { id:47, diff:"medium", type:"mcq", cat:"service",
+    q:"A campaign to raise public awareness about polio falls under which type of service?",
+    choices:["Direct service", "Indirect service", "Advocacy", "Vocational service"],
+    ans:2,
+    expl:"Advocacy = raising awareness or pushing for policy change. Direct = face-to-face with beneficiaries; Indirect = supporting from behind the scenes." },
+
+  { id:48, diff:"medium", type:"mcq", cat:"interact",
+    q:"Who is the District Interact Representative (DIR)?",
+    choices:[
+      "A Rotarian appointed by the District Governor",
+      "An Interactor elected by the Interactors in the district",
+      "A faculty adviser nominated by their school",
+      "The president of the largest Interact club"],
+    ans:1,
+    expl:"The DIR is an Interactor — elected by the Interactors in the district — who co-chairs the District Interact Committee and represents the peer voice of all Interactors." },
+
+  { id:49, diff:"medium", type:"mcq", cat:"interact",
+    q:"What is the recommended minimum number of charter members to start an Interact club?",
+    choices:["5", "10", "15", "25"],
+    ans:2,
+    expl:"15 charter members is the recommended minimum (not mandated) under the older RI handbook. Each must commit to attending at least 60% of club activities." },
+
+  { id:50, diff:"hard", type:"mcq", cat:"interact",
+    q:"To terminate a member 'for cause,' what vote threshold is required?",
+    choices:["Simple majority", "Two-thirds of all members in good standing", "Three-quarters of all members", "Unanimous"],
+    ans:1,
+    expl:"Article IV of the Standard Constitution requires a 2/3 vote of all members in good standing to terminate membership for cause." },
+
+  { id:51, diff:"hard", type:"mcq", cat:"interact",
+    q:"By what date must the Rotary Citation for Interact Clubs nomination form be submitted?",
+    choices:["1 July", "15 August", "1 November", "30 June"],
+    ans:1,
+    expl:"15 August following the Rotary year (which runs 1 July – 30 June). The sponsor club officers or the Interact club adviser submit the form." },
+
+  { id:52, diff:"hard", type:"mcq", cat:"interact",
+    q:"Roughly how many countries currently host Interact clubs?",
+    choices:["~50", "~100", "~145", "~200"],
+    ans:2,
+    expl:"Interact is present in roughly 145 countries (~14,900+ clubs, ~340,000+ Interactors). The 2007 handbook listed 120 countries — it's grown significantly." },
+
+  { id:53, diff:"hard", type:"mcq", cat:"interact",
+    q:"In a community-based Interact club, the meetings of the club and board are not 'official' unless what is true?",
+    choices:[
+      "At least half the membership is present",
+      "The district governor approves the agenda",
+      "A member of the sponsor Rotary club's Interact committee is in attendance",
+      "The faculty adviser signs the minutes"],
+    ans:2,
+    expl:"Per the Standard Constitution: in community-based clubs, EVERY meeting needs a sponsor-club Interact-committee member present. In school-based clubs, this applies to board meetings only." },
+
+  { id:54, diff:"officer", type:"fr", cat:"interact",
+    q:"\"A new school wants to start an Interact club. Walk us through what they need to do.\"",
+    framework:"Walk the <strong>seven steps</strong> in order, with concrete examples: (1) Find a Rotary club sponsor and an adviser (teacher or community volunteer). (2) Decide school-based vs community-based, age range, meeting format. (3) Recruit ~15+ founding members. (4) Adopt the Standard Interact Club Constitution and write bylaws. (5) Elect a board — President, VP, Secretary, Treasurer. (6) Complete the Interact Club Certification Form, get signatures from sponsor president + district governor, email to interact@rotary.org (no fee). (7) Hold a charter ceremony when the Certificate of Organization arrives.",
+    sample:"Strong close: \"They should plan to hit those steps in roughly 8–10 weeks, since the certificate itself takes 4–6 weeks after RI receives the form. I'd suggest they target chartering in September so their first big project lines up with World Interact Week in November.\"" },
+
+  { id:55, diff:"officer", type:"fr", cat:"service",
+    q:"\"How would you design a service project using the service-learning framework?\"",
+    framework:"Hit all five steps explicitly: <strong>Investigation</strong> (what need? what causes it? talk to whom?), <strong>Planning</strong> (goals, timeline, roles, follow-up), <strong>Action</strong> (which type — direct, indirect, or advocacy — and why), <strong>Reflection</strong> (how you'll capture lessons throughout, not just after), <strong>Demonstration</strong> (how you'll share results — Rotary Showcase, social media, district conference).",
+    sample:"Anchor in a specific project. Avoid abstract language. Example: \"For our literacy project, the Investigation phase would mean a week of visits to the local government school to talk to teachers — not just assuming what they need.\"" },
+];
+
+const DEBATES = [
+  { id:1, cat:"Strategy",
+    motion:"This house believes Interact clubs should focus deeply on ONE Area of Focus rather than spread across all seven.",
+    for:[
+      "Depth builds expertise — a club known for one cause becomes the school's go-to for it.",
+      "Easier to measure impact year-on-year. One cause, one metric, real comparability.",
+      "Sharper recruitment identity. \"The climate club\" beats \"the club that does everything.\"",
+      "Mirrors how successful Rotary clubs operate — a signature project anchors the year."
+    ],
+    against:[
+      "District 3012's point system explicitly rewards breadth — 10 hashtags, 10 activity heads.",
+      "Interact's purpose is exposing students to ALL Five Avenues of Service. Narrowing violates the mission.",
+      "Different members care about different causes. Single-focus clubs lose members fast.",
+      "The FIRST Object of Rotary — acquaintance — is built on breadth, not specialisation."
+    ],
+    winning_move:"Argue \"spike + supporting\" — one signature deep project, plus four-to-five lighter projects across other areas. Cite that Rotary clubs do exactly this. Smart spread earns ~500 Go Points under D3012 where pure depth caps lower.",
+    pitfall:"\"Both are important\" isn't a position. Pick a side, defend with one strong point, concede one opposing point fairly, then resolve." },
+
+  { id:2, cat:"Modern",
+    motion:"This house believes social-media visibility now matters more than ground impact for an Interact club.",
+    for:[
+      "GoSharpener literally awards points for posting. The system itself is built around visibility.",
+      "Recruitment in 2026 is digital. A club with a strong Instagram grows; an invisible one dies.",
+      "Visibility brings sponsors, partners, and media coverage — which then amplify the impact.",
+      "Undocumented service can't be cited, replicated, or scaled. Documentation IS impact."
+    ],
+    against:[
+      "Rotary's motto is Service Above Self, not Service For The Camera.",
+      "The Four-Way Test's question 4 — \"beneficial to all concerned?\" — fails reels that feed no one.",
+      "Performative service erodes trust with the community served (NGOs, govt schools, partners).",
+      "Officer hours editing reels are hours not planning camps. Every minute trades against impact."
+    ],
+    winning_move:"Reject the binary. Documentation must follow impact, not lead it. Cite the District rule that Google-image posts are rejected — the system itself requires authentic ground action first.",
+    pitfall:"Don't be preachy. Acknowledge that visibility drives funding and recruitment — denying it sounds naïve." },
+
+  { id:3, cat:"Mission",
+    motion:"This house believes fundraising is a higher form of service than direct volunteering.",
+    for:[
+      "Money scales. ₹50,000 funds 100 ration kits; 10 student-hours feed 10 people.",
+      "The Rotary Foundation is built entirely on this premise — Klumph's $26.50 became billions in grants.",
+      "Fundraising builds professional skills — pitching, negotiation, sponsor relations — direct service doesn't.",
+      "It democratises participation — members who can't travel or volunteer can still contribute meaningfully."
+    ],
+    against:[
+      "Money without engagement creates dependency, not capability. Direct service builds long-term agency.",
+      "The FIRST Object of Rotary is acquaintance — fundraising is transactional, volunteering is relational.",
+      "Donors stop donating. Volunteer networks compound.",
+      "Where the money lands matters more than how much was raised. Fundraising without follow-through is theater."
+    ],
+    winning_move:"Argue both feed each other — money funds the volunteer presence; volunteer presence proves the fundraiser was real. Cite #FunKaroRaiseKaro and #Healthcarecamp sitting side by side in D3012's own structure.",
+    pitfall:"Don't dismiss fundraising as \"lazy service.\" It builds critical skills and is harder than it looks." },
+
+  { id:4, cat:"Mission",
+    motion:"This house believes international projects matter more than local ones for an Interact club.",
+    for:[
+      "The FOURTH Object of Rotary is international understanding, goodwill, and peace — the climax of the mission.",
+      "D3012 awards 50 Go Points for international collaboration vs 20 for national — the system signals what's valued.",
+      "Local problems are familiar; international service expands worldview at the age it matters most.",
+      "Cross-border friendships at 16 become lifelong professional networks at 30."
+    ],
+    against:[
+      "The THIRD Object of Rotary is service in \"personal, business, and community life\" — community is local.",
+      "You can't fix what you don't understand. A teenager from Pune is more useful in Pune than in Angola.",
+      "International projects often become tokenistic — letter-writing campaigns no one reads.",
+      "The minimum requirement is ONE of each — not \"prefer international.\""
+    ],
+    winning_move:"Reframe: the international project should be the EXPORT of a successful local one. Don't run a parallel international thread; lift a local win into a partnership. The Interact rule is ONE local AND ONE international, in that order.",
+    pitfall:"Don't downplay international — it's literally in the Object of Rotary." },
+
+  { id:5, cat:"System",
+    motion:"This house believes the GoSharpener point system rewards posting over genuine impact.",
+    for:[
+      "A 50-point Health Care Camp and a 50-point Project Annapoorna are weighted identically despite vastly different scales.",
+      "One photo per activity means documentation effort is fixed regardless of project size — incentives are flat.",
+      "The 30th-of-the-month cut-off encourages rushed posting, not careful project execution.",
+      "Schools begin optimising for hashtags rather than for community partners."
+    ],
+    against:[
+      "Points are not the goal — the system exists to make impact comparable across 50+ schools.",
+      "Activities have minimums baked in (real photos, no Google images) — gaming is harder than it looks.",
+      "The District Governor has FINAL discretion on validity — there's a human override.",
+      "\"Posting over impact\" is a teenager problem, not a system problem."
+    ],
+    winning_move:"Argue the system is the floor, not the ceiling — clubs layer additional rigor (impact reports, NGO testimonials) on top. The system measures activity; the club measures impact.",
+    pitfall:"Don't bash the District publicly — you'll be reporting TO it next year. Critique structurally, not personally." },
+
+  { id:6, cat:"Mission",
+    motion:"This house believes climate action should now be Rotary's #1 cause, ahead of polio eradication.",
+    for:[
+      "Polio is at 99.9% reduction — from 125 endemic countries to 2. The job is functionally done.",
+      "Climate is the only Area of Focus where inaction makes ALL the others worse — water, health, peace, education.",
+      "\"Supporting the environment\" was added in 2020 as the 7th area precisely because Rotary recognised this.",
+      "The current generation of Interactors will inherit climate consequences directly — Rotary should reflect their stakes."
+    ],
+    against:[
+      "\"Nearly done\" is exactly when eradication efforts collapse. Polio could RETURN if we redirect now.",
+      "Climate work is diffuse. Rotary's strength is specific, measurable, sustained efforts — polio is the template.",
+      "Choosing one cause over another isn't Rotary's model — the 7 Areas exist so members can pick.",
+      "Symbolic priority means symbolic budgets. Moving money away from PolioPlus has real cost."
+    ],
+    winning_move:"Argue \"finish polio AND make environment the next moonshot.\" PolioPlus took 40 years; climate is also a 40-year fight. Polio is proof Rotary can do this. Frame as expansion, not substitution.",
+    pitfall:"Don't suggest dropping PolioPlus — it's Rotary's signature achievement." },
+
+  { id:7, cat:"Strategy",
+    motion:"This house believes Interact clubs should require minimum mandatory attendance and contribution from every member.",
+    for:[
+      "Voluntary participation produces 80/20 outcomes — 20% of members do 80% of the work. Mandates fix that.",
+      "Two projects + six meetings per year is already the club minimum — extending it to individuals is consistent.",
+      "Members who don't show up dilute the brand — a \"member\" attending one event a year is meaningless.",
+      "Clear expectations help admissions narratives. \"I attended 12 projects\" beats \"I'm a member.\""
+    ],
+    against:[
+      "Coercion is anti-Rotary. The whole ethos is voluntary fellowship. \"Mandatory service\" is a contradiction.",
+      "Real members have IB, Boards, family. Flexibility keeps them engaged at all.",
+      "Punishing absence drives out the exact members you want — overcommitted high-achievers stop coming.",
+      "Energy spent enforcing mandates is energy not spent on projects."
+    ],
+    winning_move:"Propose tiered membership — active / contributing / honorary — where the active tier has a minimum and is eligible for leadership. Membership stays voluntary; officer-eligibility is earned.",
+    pitfall:"Don't argue for hard punishment. Argue for clarity and incentives." },
+
+  { id:8, cat:"Modern",
+    motion:"This house believes AI fluency should now be a core requirement for Interact officers, equal to communication or organisation.",
+    for:[
+      "Officer work is largely digital — project docs, social posts, fundraiser pitches. Officers who don't use AI are slower.",
+      "Same impact in half the time = double the projects = more service.",
+      "Officers who model AI literacy teach the rest of the club — closing the digital-literacy gap is itself service.",
+      "Rotary's mission is preparing future leaders. In 2026, future leaders use AI as a default tool."
+    ],
+    against:[
+      "AI generates plausible content with no real ownership. Officers who lean on it stop developing their own skills.",
+      "Authenticity matters. Donors, partners, and recipients can tell when a pitch was AI-written — trust erodes.",
+      "Communication and organisation are HUMAN skills. AI fluency is a tool. The two aren't comparable.",
+      "Mandating AI excludes members without device access or who object on principle."
+    ],
+    winning_move:"Reframe: AI is to officers what Excel is to accountants — not the skill itself, the tool that magnifies the skill. Treat it as baseline (like email), not as a core competency.",
+    pitfall:"Don't be evangelical. Rotary audiences trend older and skeptical — frame AI carefully." }
+];
+
+const INTERVIEW = [
+  { id:1, role:"All officers",
+    q:"Tell us about yourself in 60 seconds.",
+    testing:"Self-editing under pressure. Whether you lead with identity or trivia. Whether you can close cleanly.",
+    framework:"3 beats. (1) Identity — grade, school, one defining academic or extracurricular interest. (2) Interact track record — what you've done in the club, with one number. (3) Why you're here — the role you're applying for, plus a one-line preview of your platform. Land hard, no trail-off.",
+    sample:"\"Grade 11 IB, biochem track. Member of Interact for 2 years. Last term I led the bottle-cap recycling drive — 1,200 caps collected — and I ran point on the Annapoorna ration drive. I'm here for the Secretary role because documentation is the gap I see in our club, and that's the gap I want to close.\"",
+    pitfall:"Don't recite your CV. Don't open with \"I'm passionate.\" Don't run past 60 seconds." },
+
+  { id:2, role:"All officers",
+    q:"Why this specific position, and not one of the others?",
+    testing:"Whether you've thought about the role, or just want a title.",
+    framework:"(1) What the role actually DOES — quote the responsibility in concrete terms. (2) Why the other roles aren't your strongest fit RIGHT NOW. (3) The one specific thing in this role you want to own. Anchors: President = vision + external relationships; VP = execution + ownership; Secretary = memory + continuity; Treasurer = fundraising + accountability.",
+    sample:"\"Secretary keeps the club's memory. Right now we lose six months of context every officer handover. I keep clean notes by default — my chem lab books are version-controlled. President needs the charisma I'm still building. Secretary plays to who I am today.\"",
+    pitfall:"\"Any role would be fine\" is the wrong answer. Pick one and defend it." },
+
+  { id:3, role:"All officers",
+    q:"What does \"Service Above Self\" actually mean to you — and where have YOU lived it?",
+    testing:"Whether you understand the motto beyond memorisation. Whether you have a real story.",
+    framework:"(1) Define in your own words — NOT the textbook line. (2) ONE concrete story where you chose service when it cost you something — time, social capital, comfort. (3) Tie the story back to your definition.",
+    sample:"\"To me, Service Above Self means: when there's a cost, you absorb it. Last winter I gave up the school trip to Goa to finish the Angola medical-camp documentation — 40 hours of editing over two weekends. The trip mattered; the documentation was the thing 175 children depended on us actually shipping.\"",
+    pitfall:"Don't define the motto in textbook terms. Don't tell a story where service cost you nothing." },
+
+  { id:4, role:"All officers",
+    q:"Tell us about a leadership failure. What did you change after?",
+    testing:"Self-awareness and the ability to learn — not whether you've failed.",
+    framework:"STAR works. (1) A specific failure — not catastrophic, not fake-modest. (2) Take ownership — no blaming teammates or circumstances. (3) The exact change you made after. (4) Evidence the change stuck.",
+    sample:"\"At last year's MUN I ran point on logistics and didn't double-check the printer booking — 80 delegates arrived to empty paper trays. I now run a 48-hours-out checklist for every event I lead. The Annapoorna ration drive shipped flawlessly because of that checklist.\"",
+    pitfall:"\"My biggest weakness is I work too hard\" is the kiss of death. Don't fake-fail." },
+
+  { id:5, role:"All officers",
+    q:"How will you balance Interact responsibilities with IB / Boards workload?",
+    testing:"Whether you've thought about your own capacity. Whether you'll burn out by November.",
+    framework:"(1) Acknowledge the workload is real — don't bluff. (2) Name your weekly time budget for Interact (e.g. 6 hours, 10 in event weeks). (3) Show how you'll PROTECT it — calendar blocks, pre-event blackout days. (4) Name one IB-overlap risk (IA window, mocks) and how you'll pre-empt it with a named deputy.",
+    sample:"\"Six hours a week — Tuesday and Saturday blocks. Pre-event week I scale to ten by cutting screen time, not study time. My IB IAs are due February 15 — that's the window I'll need a deputy to step in, and I'll name that deputy in October, not the night before.\"",
+    pitfall:"Don't promise unlimited availability. Don't pretend Interact is your top priority — it's not, and they know." },
+
+  { id:6, role:"President / VP",
+    q:"Walk us through your first 90 days if elected.",
+    testing:"Whether you can plan. Whether you've thought past the election itself.",
+    framework:"Three 30-day blocks. (1) Days 1-30: LISTENING — 1:1 with every member, audit last year's GoSharpener posts, identify the 1-2 problems to fix. (2) Days 31-60: first project shipped — small, fast, visible, team-building. (3) Days 61-90: lock the annual calendar — name the flagship and the international partner. Mention the monthly D3012 posting cadence.",
+    sample:"\"Days 1-30: 15-minute 1:1 with every member; audit GoSharpener for what was posted versus attempted. Days 31-60: a Health Care Camp shipped by week 8 — 50 points, an activity we haven't run yet. Days 61-90: full-year calendar published, with our international #UniteToEmpower partner named and signed.\"",
+    pitfall:"Don't promise a flagship in week 1 — it signals you don't understand pace." },
+
+  { id:7, role:"All officers",
+    q:"Two members are in serious conflict. One is your close friend. How do you handle it?",
+    testing:"Whether you'll let friendship compromise fairness.",
+    framework:"(1) Acknowledge the conflict of interest OUT LOUD — don't pretend it doesn't exist. (2) Recuse from arbitration if possible — bring in another officer or the faculty advisor. (3) If you must arbitrate, run the Four-Way Test on YOURSELF, not just the dispute. (4) Close: state what fairness costs you (the friendship's comfort) and that you'll pay it.",
+    sample:"\"I'd tell both of them, openly, that one is my close friend and I'm going to recuse from the decision itself. I'd bring in the Vice President or our faculty advisor. If recusal isn't possible, I'd run my proposed decision past one of them BEFORE telling either party. Then I'd own the call — including with my friend.\"",
+    pitfall:"\"I'd talk to them and they'd understand\" is not an answer. Show the structural move, not the wish." },
+
+  { id:8, role:"All officers",
+    q:"Which question of the Four-Way Test do you find HARDEST to apply in real life?",
+    testing:"Whether you've actually used the test or just memorised it.",
+    framework:"Pick ONE (not \"all four are hard\"). Strong picks: #2 \"Is it fair to all concerned?\" or #4 \"Will it be beneficial to all concerned?\" — both have hidden complexity. Explain the situation where it gets hard and how you reconcile it.",
+    sample:"\"Question 2 — fairness. \"All concerned\" is a moving boundary. When we ran the bottle-cap drive, fairness to my classmates meant a quick, fun project. Fairness to the waste-pickers meant doing it right — sorting by polymer type, which took three times longer. I default to the further circle now, but it's a real cost.\"",
+    pitfall:"Don't pick #1 \"Is it the truth?\" — it makes you sound like you struggle with honesty. Pick a structurally hard one." },
+
+  { id:9, role:"All officers",
+    q:"Pitch us a service project we have NOT run before.",
+    testing:"Originality, feasibility, alignment with the club's actual situation.",
+    framework:"(1) The problem — observed locally, not abstract. (2) The project — concrete enough that a member could execute next month. (3) The partner — name a real one (NGO, Rotary club, school). (4) The measurable — what you'd count. (5) The D3012 hashtag it maps to.",
+    sample:"\"Multilingual STEM tutoring for migrant-worker children at the Khadki Cantonment school — most kids speak Marathi or Hindi at home but science is taught in English. We pair Interactors who speak both with a child for a 6-week module. Partner: Door Step School. Measure: pre/post quiz delta and attendance. Hashtag: #IgnitetheMind under EKSHA. 30 points × 12 sessions = 360 over the term.\"",
+    pitfall:"Don't pitch something that needs ₹5 lakhs or international travel. Real, ship-this-month." },
+
+  { id:10, role:"President / VP",
+    q:"A flagship project flops at the halfway mark. What's your move?",
+    testing:"Composure under failure. Whether you have a recovery instinct or you freeze.",
+    framework:"(1) First 24 hours: stop the bleeding — pause new commitments, gather data, talk to the team. (2) Decide: scope down, pivot, or kill. (3) Communicate honestly — to the club, to the sponsoring Rotary club, to any external partner. (4) Document the failure so the next officer doesn't repeat it. (5) Show no shame about killing it — Four-Way Test #4 is \"beneficial to all\" and a doomed project benefits no one.",
+    sample:"\"If we were halfway and impact was zero, I'd kill it within a week — not let it limp through the term. I'd write a one-page post-mortem, share it with the Rotary-club sponsor, and propose what we redirect the volunteer hours to. Killing a bad project is more courageous than finishing it for optics.\"",
+    pitfall:"\"I'd push through\" is not a leadership answer — it's a stubbornness answer." },
+
+  { id:11, role:"All officers",
+    q:"Why should we pick YOU over the other candidates?",
+    testing:"Whether you can self-advocate without being arrogant.",
+    framework:"(1) The ONE thing you do better than anyone else in the room — not \"I'm passionate\" or \"I work hard.\" A concrete capability. (2) Tie it to the specific gap this role has. (3) Acknowledge one thing another candidate may do better, and explain why your gap matters MORE this year. (4) Close on what you'll PROVE in 90 days.",
+    sample:"\"The other candidates are stronger speakers than me. I'm better at finishing things. This year our backlog is three unshipped projects from last term. If you want a louder club, pick someone else. If you want a club that ships, pick me. By December 31 I will have closed at least two of those three backlog projects on top of new ones.\"",
+    pitfall:"Don't trash other candidates. The concession that they're better at X is what makes the rest credible." },
+
+  { id:12, role:"All officers",
+    q:"What's one thing you would CHANGE about how this club currently operates?",
+    testing:"Whether you can criticise constructively without alienating the current officers in the room.",
+    framework:"(1) Lead with what's WORKING — credit current leadership for one specific thing. (2) Name ONE change — process, not personality. (3) Show why now is the moment for it (new term, new project pipeline). (4) Acknowledge the risk of the change and how you'd mitigate it.",
+    sample:"\"The current officers built the strongest social-media presence we've ever had — I'd protect that. What I'd change is the meeting cadence: weekly 30-minute project standups instead of a monthly 2-hour meeting. Faster feedback, less meeting fatigue. The risk is members forget what was decided — I'd send a 5-line written summary after every standup.\"",
+    pitfall:"Don't pretend everything is perfect. Don't criticise people in the room. Stay on process." },
+
+  { id:13, role:"Treasurer / VP",
+    q:"How would you raise ₹50,000 for our flagship fundraiser this year?",
+    testing:"Whether you have a concrete, sequenced plan — or just a wish.",
+    framework:"(1) Mix of sources — bake-sale-style retail, corporate sponsorship, alumni outreach, online platform (Milaap / Ketto). (2) Numbers per channel — how each adds up to ₹50K. (3) Timeline — what closes first, what's the back-stop. (4) Cite #FunKaroRaiseKaro tier: above ₹50K is 150 Go Points, below is 75 — the goal sits at the tier-break for a reason.",
+    sample:"\"Three channels. Channel 1: bake-and-craft sale at the parent-teacher meet — ₹15K from ~300 parents. Channel 2: two corporate sponsors at ₹10K each via my dad's network and the school's alumni list — ₹20K. Channel 3: a Milaap page run for 30 days with class-wise targets — ₹15K. Total ₹50K, with alumni outreach as the back-stop if Milaap underperforms. We file under #FunKaroRaiseKaro for the 150-point tier.\"",
+    pitfall:"Don't say \"we'll figure out funding as we go.\" Don't pitch a number without channels." },
+
+  { id:14, role:"All officers",
+    q:"How will you grow club membership next year?",
+    testing:"Whether you understand recruitment is a system, not an event.",
+    framework:"Three levers. (1) VISIBILITY — assembly slot, social posts, a recruitment table in the first two weeks of term. (2) ONBOARDING — every new member is on a first project within four weeks. (3) RETENTION — public recognition, officer mentorship, a clear track to next year's officer roles. Cite global scale (14,911 clubs / ~343K Interactors / 145 countries) — you're recruiting into something larger than the school.",
+    sample:"\"Visibility: a 5-minute assembly pitch in week 1 plus an Interact table at the school fair. Onboarding: every signup gets paired with an officer and is on a real project (not shadowing) within four weeks. Retention: a public \"Interactor of the month\" shoutout in the school newsletter and a written track to officer roles by end of Grade 11. Target: 30 active members by November, up from 18.\"",
+    pitfall:"\"We'll put up posters\" is not a strategy. Show the system." },
+
+  { id:15, role:"All officers",
+    q:"Name a Rotary or Interact moment in history that genuinely moved you.",
+    testing:"Whether you've engaged with the lore or just memorised dates.",
+    framework:"Pick something SPECIFIC, not \"the founding.\" Strong picks: the 1979 Philippines polio drive (seed that became PolioPlus), Sylvia Whitlock becoming the first woman Rotary president in 1987, the 1962 Melbourne Florida charter, the $26.50 that became the Rotary Foundation. Explain WHY it moved you in your own life context.",
+    sample:"\"Arch Klumph's $26.50 in 1917. It moved me because nobody in that room believed they were building a foundation that would one day give out billions — they thought they were starting a small fund. It taught me that the size of the first action doesn't predict the size of the eventual impact. That's why I don't dismiss our Grade 9 members' \"small\" projects — the ration drive that funds 50 families this year is somebody's $26.50 a decade from now.\"",
+    pitfall:"Don't pick \"the founding\" — too generic. Don't recite a date without the meaning." }
 ];
 
 const HANDBOOK = {
@@ -1088,7 +1646,7 @@ let state = {
   quiz: null,   // { questions, idx, score, answers }
 };
 
-const TAB_ORDER = ["concepts","people","programs","quotes","quiz","highyield","handbook"];
+const TAB_ORDER = ["concepts","people","programs","quotes","quiz","interview","highyield","handbook"];
 
 const CONCEPT_CATS = ["all","identity","focus","service","test","symbol","interact"];
 const PEOPLE_CATS  = ["all","people","history"];
@@ -1132,6 +1690,7 @@ function renderTabs(){
   document.getElementById("ct-programs").textContent = PROGRAMS.length;
   document.getElementById("ct-quotes").textContent   = QUOTES.length;
   document.getElementById("ct-quiz").textContent     = QUESTIONS.length;
+  document.getElementById("ct-interview").textContent = DEBATES.length + INTERVIEW.length;
 }
 
 function conceptCard(c){
@@ -1228,6 +1787,60 @@ function renderHighYield(){
   return html;
 }
 
+function debateCard(d){
+  return `<div class="card cat-debate">
+    <div class="meta">
+      <span class="tag debate">Debate</span>
+      <span class="tag role">${d.cat}</span>
+    </div>
+    <h3>${d.motion}</h3>
+    <div class="debate-split">
+      <div class="debate-side for">
+        <h5>For the motion</h5>
+        <ul>${d.for.map(p=>`<li>${p}</li>`).join("")}</ul>
+      </div>
+      <div class="debate-side against">
+        <h5>Against the motion</h5>
+        <ul>${d.against.map(p=>`<li>${p}</li>`).join("")}</ul>
+      </div>
+    </div>
+    <div class="pull"><strong>Winning move:</strong> ${d.winning_move}</div>
+    <div class="related">↳ <strong>Pitfall:</strong> ${d.pitfall}</div>
+  </div>`;
+}
+
+function interviewCard(iv){
+  return `<div class="card cat-interview">
+    <div class="meta">
+      <span class="tag interview">Interview</span>
+      <span class="tag role">${iv.role}</span>
+    </div>
+    <h3>${iv.q}</h3>
+    <div class="field"><span class="lbl">Testing</span><span class="val">${iv.testing}</span></div>
+    <div class="field"><span class="lbl">Framework</span><span class="val">${iv.framework}</span></div>
+    <div class="pull"><strong>Sample answer:</strong> ${iv.sample}</div>
+    <div class="related">↳ <strong>Pitfall:</strong> ${iv.pitfall}</div>
+  </div>`;
+}
+
+function renderInterviewPrep(){
+  const dList = DEBATES.filter(d => matchSearch(d, state.search));
+  const iList = INTERVIEW.filter(iv => matchSearch(iv, state.search));
+  const debateHtml = dList.length
+    ? `<div class="grid">${dList.map(debateCard).join("")}</div>`
+    : `<div class="placeholder"><h3>No matching debates.</h3></div>`;
+  const ivHtml = iList.length
+    ? `<div class="grid">${iList.map(interviewCard).join("")}</div>`
+    : `<div class="placeholder"><h3>No matching interview questions.</h3></div>`;
+  return `<div class="summary-bar">
+    <h2>Interview <span class="sublabel">— group-debate motions and personal-interview drills, with frameworks and pitfalls</span></h2>
+  </div>
+  <div class="section-divider">Group Debate Topics <span class="sublabel">${DEBATES.length} motions · with For / Against / Winning Move / Pitfall</span></div>
+  ${debateHtml}
+  <div class="section-divider">Personal Interview Questions <span class="sublabel">${INTERVIEW.length} questions · with framework, sample answer, and pitfall</span></div>
+  ${ivHtml}`;
+}
+
 function renderHandbook(){
   const hb = HANDBOOK;
 
@@ -1301,6 +1914,17 @@ function renderHandbook(){
     </div>
   </div>`;
 
+  const handbooks = `<div class="hb-section">
+    <h3>Official Interact Handbooks (PDF)</h3>
+    <div class="hb-rules">
+      <p style="margin:0 0 10px;">Content from both of these handbooks has been integrated across the <strong>Concepts</strong>, <strong>Programs</strong>, <strong>Quotes</strong>, and <strong>Quiz</strong> tabs — including the 9 constitutional goals, the seven-step chartering process, the service-learning framework, the four standing committees, the Citation goals, and the constitutional attendance / meeting / quorum rules.</p>
+      <ul>
+        <li><a href="https://clubrunner.blob.core.windows.net/00000050043/en-ca/files/homepage/interact-guide-for-interactors/interact-handbook-guide-for-interactors-en-1.pdf" target="_blank" rel="noopener"><strong>Interact Handbook — Guide for Interactors</strong></a> (Rotary International, current edition). Covers starting a club, safety &amp; inclusion, electing officers, service-learning, promoting your club, district support, and the Rotary Citation for Interact Clubs.</li>
+        <li><a href="https://rotary.org.pl/wp-content/uploads/2019/03/interact-handbook.pdf" target="_blank" rel="noopener"><strong>Interact Handbook</strong></a> (Rotary International, 2007 edition · Rotary Poland mirror). Contains the full <strong>Standard Interact Club Constitution &amp; Bylaws</strong>, officer duties, the six-step club-formation checklist, and the Rotary Calendar of Observances.</li>
+      </ul>
+    </div>
+  </div>`;
+
   const sources = `<div class="hb-section">
     <h3>Other Canonical Sources Behind This Prep</h3>
     <div class="hb-rules">
@@ -1324,6 +1948,7 @@ function renderHandbook(){
   ${activities}
   ${leaders}
   ${internship}
+  ${handbooks}
   ${sources}`;
 }
 
@@ -1508,6 +2133,7 @@ function render(){
     case "programs":  root.innerHTML = renderPrograms(); break;
     case "quotes":    root.innerHTML = renderQuotes(); break;
     case "quiz":      root.innerHTML = renderQuiz(); setupQuizHandlers(); break;
+    case "interview": root.innerHTML = renderInterviewPrep(); break;
     case "highyield": root.innerHTML = renderHighYield(); break;
     case "handbook":  root.innerHTML = renderHandbook(); break;
   }
